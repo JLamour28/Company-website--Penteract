@@ -1,6 +1,41 @@
 /* ─── SECTIONS ─── */
 
 /* ════════════════════════════
+   HERO BRAND MARK (logo featured above hero text)
+════════════════════════════ */
+.hero-brand-mark {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 32px;
+}
+.hero-brand-glow {
+  position: absolute;
+  inset: -24px -40px;
+  background: radial-gradient(ellipse at center, rgba(10,173,173,0.22) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: heroLogoGlow 4s ease-in-out infinite;
+  pointer-events: none;
+}
+.hero-brand-img {
+  height: 64px;
+  width: auto;
+  display: block;
+  position: relative;
+  z-index: 1;
+  filter: brightness(0) invert(1) drop-shadow(0 0 12px rgba(10,173,173,0.60));
+  animation: heroLogoFloat 6s ease-in-out infinite;
+}
+@keyframes heroLogoGlow {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.08); }
+}
+@keyframes heroLogoFloat {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-4px); }
+}
+
+/* ════════════════════════════
    HOW WE CONNECT THE DOTS
 ════════════════════════════ */
 .dots-section {

@@ -103,11 +103,12 @@
 }
 
 /* ── Hero text entrance helpers ── */
-.hero-animate-1 { opacity: 0; animation: fadeUp 0.9s var(--ease-out) 0.15s forwards; }
-.hero-animate-2 { opacity: 0; animation: fadeUp 0.9s var(--ease-out) 0.30s forwards; }
-.hero-animate-3 { opacity: 0; animation: fadeUp 0.9s var(--ease-out) 0.45s forwards; }
-.hero-animate-4 { opacity: 0; animation: fadeUp 0.9s var(--ease-out) 0.60s forwards; }
-.hero-animate-5 { opacity: 0; animation: fadeUp 0.9s var(--ease-out) 0.75s forwards; }
+.hero-animate-0 { opacity: 0; animation: fadeUp 0.9s var(--ease-out) 0.05s forwards; }
+.hero-animate-1 { opacity: 0; animation: fadeUp 0.9s var(--ease-out) 0.20s forwards; }
+.hero-animate-2 { opacity: 0; animation: fadeUp 0.9s var(--ease-out) 0.35s forwards; }
+.hero-animate-3 { opacity: 0; animation: fadeUp 0.9s var(--ease-out) 0.50s forwards; }
+.hero-animate-4 { opacity: 0; animation: fadeUp 0.9s var(--ease-out) 0.65s forwards; }
+.hero-animate-5 { opacity: 0; animation: fadeUp 0.9s var(--ease-out) 0.80s forwards; }
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {

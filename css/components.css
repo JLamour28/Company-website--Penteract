@@ -134,32 +134,65 @@
 .nav-logo-wrap {
   display: flex;
   align-items: center;
-  padding: 6px 18px 6px 12px;
+  padding: 7px 20px 7px 14px;
   background: var(--dark-800);
   border-radius: var(--radius-pill);
-  border: 1px solid rgba(10, 173, 173, 0.28);
-  box-shadow: 0 0 20px rgba(10, 173, 173, 0.16), 0 2px 8px rgba(0,0,0,0.20);
+  border: 1px solid rgba(10, 173, 173, 0.35);
+  box-shadow: 0 0 24px rgba(10, 173, 173, 0.20), 0 2px 8px rgba(0,0,0,0.24);
+  animation: logoNavGlow 5s ease-in-out infinite;
   transition:
     box-shadow var(--duration-base) var(--ease-out),
     border-color var(--duration-base),
     transform var(--duration-fast) var(--ease-out);
   flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+.nav-logo-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.10), transparent);
+  transform: skewX(-20deg);
+  transition: none;
+  pointer-events: none;
+}
+.nav-logo-wrap:hover::after {
+  animation: logoShimmer 0.65s ease forwards;
 }
 .nav-logo-wrap:hover {
-  box-shadow: 0 0 32px rgba(10, 173, 173, 0.32), 0 4px 16px rgba(0,0,0,0.24);
-  border-color: rgba(10, 173, 173, 0.55);
+  box-shadow: 0 0 40px rgba(10, 173, 173, 0.45), 0 4px 20px rgba(0,0,0,0.28);
+  border-color: rgba(10, 173, 173, 0.70);
   transform: translateY(-1px);
 }
 .nav-logo {
   /* Transparent PNG — invert to pure white on the dark pill background */
-  height: 34px;
+  height: 42px;
   width: auto;
   filter: brightness(0) invert(1);
   display: block;
-  transition: opacity var(--duration-base);
+  transition: opacity var(--duration-base), filter var(--duration-base);
 }
 .nav-logo-wrap:hover .nav-logo {
-  opacity: 0.88;
+  opacity: 0.92;
+  filter: brightness(0) invert(1) drop-shadow(0 0 6px rgba(255,255,255,0.5));
+}
+
+@keyframes logoNavGlow {
+  0%, 100% {
+    box-shadow: 0 0 24px rgba(10, 173, 173, 0.20), 0 2px 8px rgba(0,0,0,0.24);
+    border-color: rgba(10, 173, 173, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 38px rgba(10, 173, 173, 0.38), 0 4px 14px rgba(0,0,0,0.24);
+    border-color: rgba(10, 173, 173, 0.60);
+  }
+}
+@keyframes logoShimmer {
+  0%   { left: -100%; }
+  100% { left: 150%; }
 }
 
 /* Links */
@@ -401,25 +434,38 @@
 .footer-logo-wrap {
   display: inline-flex;
   align-items: center;
-  padding: 10px 22px;
-  /* White bg pill so the transparent PNG renders with its natural teal+black colors */
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 12px 26px;
+  background: rgba(10, 173, 173, 0.08);
+  border: 1px solid rgba(10, 173, 173, 0.30);
   border-radius: var(--radius-pill);
   margin-bottom: 20px;
+  box-shadow: 0 0 28px rgba(10, 173, 173, 0.12);
   transition: border-color var(--duration-base), box-shadow var(--duration-base), background var(--duration-base);
+  position: relative;
+  overflow: hidden;
+}
+.footer-logo-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-pill);
+  background: radial-gradient(ellipse at 30% 50%, rgba(10,173,173,0.12) 0%, transparent 70%);
+  pointer-events: none;
 }
 .footer-logo-wrap:hover {
-  background: rgba(255, 255, 255, 0.10);
-  border-color: rgba(10, 173, 173, 0.40);
-  box-shadow: 0 0 22px rgba(10, 173, 173, 0.14);
+  background: rgba(10, 173, 173, 0.14);
+  border-color: rgba(10, 173, 173, 0.55);
+  box-shadow: 0 0 40px rgba(10, 173, 173, 0.28), 0 4px 20px rgba(0,0,0,0.20);
 }
 .footer-logo {
-  /* Natural colors show on the semi-transparent pill — logo is transparent PNG */
-  height: 34px;
-  filter: brightness(0) invert(1);  /* white on dark footer */
+  height: 44px;
+  filter: brightness(0) invert(1);
   display: block;
-  transition: filter var(--duration-base);
+  transition: filter var(--duration-base), transform var(--duration-base);
+}
+.footer-logo-wrap:hover .footer-logo {
+  filter: brightness(0) invert(1) drop-shadow(0 0 8px rgba(255,255,255,0.4));
+  transform: scale(1.03);
 }
 
 /* ── Responsive ── */
