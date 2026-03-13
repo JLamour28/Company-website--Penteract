@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Salesforce Consulting Partner | Penteract Technologies</title>
+  <meta name="description" content="Dream, Build, Transcend. Penteract Technologies — Salesforce consulting partners helping businesses connect the dots.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/sections.css">
+
+  <style>
+    /* ── Penteract symbol section ── */
+    .symbol-section {
+      padding: 110px 0;
+      background: var(--dark-800);
+      position: relative;
+      overflow: hidden;
+    }
+    .symbol-bg-mesh {
+      position: absolute;
+      width: 700px; height: 700px;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(ellipse, rgba(10,173,173,0.10) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: glowPulse 6s ease-in-out infinite;
+    }
+    .symbol-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .symbol-canvas-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #penteractCanvas {
+      width: 100%;
+      max-width: 460px;
+      aspect-ratio: 1;
+      display: block;
+    }
+    .symbol-text .eyebrow {
+      color: rgba(255,255,255,0.4);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .symbol-text .eyebrow::before {
+      content: '';
+      display: block;
+      width: 20px; height: 2px;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+    .symbol-text h2 {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      color: #fff;
+      margin-bottom: 28px;
+    }
+    .symbol-text h2 span { color: var(--primary); }
+    .symbol-text p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.85;
+      margin-bottom: 18px;
+    }
+    .symbol-text p strong {
+      color: rgba(255,255,255,0.85);
+      font-weight: 600;
+    }
+    .symbol-pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 32px;
+    }
+    .symbol-pillar {
+      padding: 16px 14px;
+      border-radius: var(--radius-md);
+      background: rgba(10, 173, 173, 0.08);
+      border: 1px solid rgba(10, 173, 173, 0.18);
+      text-align: center;
+      transition: background var(--duration-base), border-color var(--duration-base);
+    }
+    .symbol-pillar:hover {
+      background: rgba(10, 173, 173, 0.14);
+      border-color: rgba(10, 173, 173, 0.36);
+    }
+    .symbol-pillar-icon {
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+    .symbol-pillar span {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--primary);
+    }
+
+    @media (max-width: 768px) {
+      .symbol-inner { grid-template-columns: 1fr; gap: 48px; }
+      .symbol-pillars { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════
+       NAVBAR
+  ══════════════════════════ -->
+  <div class="nav-wrap">
+    <nav class="nav-pill">
+      <a href="index.html" class="nav-logo-wrap">
+        <img src="logo.png" alt="Penteract Technologies" class="nav-logo">
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#symbol">Our Name</a></li>
+        <li>
+          <a href="https://penteract.tech/contact-penteract/" class="nav-cta-link">Get In Touch</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+
+  <!-- ══════════════════════════
+       HERO
+  ══════════════════════════ -->
+  <section class="hero">
+    <div class="hero-blob-1"></div>
+    <div class="hero-blob-2"></div>
+    <div class="hero-blob-3"></div>
+
+    <div class="container">
+      <div class="hero-inner">
+
+        <!-- Left: text -->
+        <div class="hero-text">
+          <div class="hero-eyebrow hero-animate-1">
+            <span class="dot"></span>
+            Salesforce Consulting Partner · South Africa
+          </div>
+
+          <h1 class="hero-animate-2">
+            <span class="h-muted">Using our expertise,<br>to help you</span><br>
+            <span class="h-bold">connect the dots.</span>
+          </h1>
+
+          <p class="hero-animate-3">
+            We partner with you on your Salesforce journey — enhancing operations and elevating customer experience, from strategy through to delivery.
+          </p>
+
+          <div class="hero-actions hero-animate-4">
+            <a href="https://penteract.tech/contact-penteract/" class="btn btn--primary btn--lg">
+              Start a Conversation
+              <span class="btn-icon">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+                </svg>
+              </span>
+            </a>
+            <a href="about.html" class="btn btn--outline btn--lg">Learn About Us</a>
+          </div>
+        </div>
+
+        <!-- Right: solution card carousel -->
+        <div class="hero-carousel-wrap hero-animate-5">
+          <div class="hero-carousel" id="heroCarousel">
+            <div class="hero-carousel-track" id="heroTrack">
+
+              <div class="hero-card">
+                <div class="card-dot-grid"></div>
+                <div class="hero-card-top">
+                  <span class="card-category">Design</span>
+                  <span class="card-counter">01 / 04</span>
+                </div>
+                <h3>Data Architecture & UX Design</h3>
+                <p>Architecture aligned to your business requirements — supporting processes, insights, and customer engagement.</p>
+                <div class="hero-card-bottom">
+                  <button class="arrow-btn" aria-label="Learn about Design">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <div class="hero-card">
+                <div class="card-dot-grid"></div>
+                <div class="hero-card-top">
+                  <span class="card-category">Configure</span>
+                  <span class="card-counter">02 / 04</span>
+                </div>
+                <h3>Zero-Code Platform Extension</h3>
+                <p>We extend Salesforce's fundamental features using zero-code tools to perfectly suit your business strategy.</p>
+                <div class="hero-card-bottom">
+                  <button class="arrow-btn" aria-label="Learn about Configure">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <div class="hero-card">
+                <div class="card-dot-grid"></div>
+                <div class="hero-card-top">
+                  <span class="card-category">Develop</span>
+                  <span class="card-counter">03 / 04</span>
+                </div>
+                <h3>Custom Salesforce Development</h3>
+                <p>Using Salesforce's code-based toolsets to satisfy complex business requirements beyond standard configuration.</p>
+                <div class="hero-card-bottom">
+                  <button class="arrow-btn" aria-label="Learn about Develop">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <div class="hero-card card--teal">
+                <div class="card-dot-grid"></div>
+                <div class="hero-card-top">
+                  <span class="card-category">Manage</span>
+                  <span class="card-counter">04 / 04</span>
+                </div>
+                <h3>Ongoing Org Management</h3>
+                <p>We handle your Salesforce org's routine administrative functions, so you stay focused on your core business.</p>
+                <div class="hero-card-bottom">
+                  <button class="arrow-btn" aria-label="Learn about Manage">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="carousel-dots" id="heroDots">
+            <button class="carousel-dot active" data-index="0"></button>
+            <button class="carousel-dot" data-index="1"></button>
+            <button class="carousel-dot" data-index="2"></button>
+            <button class="carousel-dot" data-index="3"></button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════
+       MARQUEE
+  ══════════════════════════ -->
+  <div class="marquee-section">
+    <p class="marquee-label">Industry Experience Across</p>
+    <div class="marquee-track-wrap">
+      <div class="marquee-track" id="marqueeTrack">
+        <!-- Duplicated for seamless loop -->
+        <div class="marquee-item"><div class="marquee-bubble">Financial<br>Services</div></div>
+        <div class="marquee-item"><div class="marquee-bubble">Construc-<br>tion</div></div>
+        <div class="marquee-item"><div class="marquee-bubble">Education</div></div>
+        <div class="marquee-item"><div class="marquee-bubble">Food &amp;<br>Beverage</div></div>
+        <div class="marquee-item"><div class="marquee-bubble">Facilities<br>Mgmt</div></div>
+        <div class="marquee-item"><div class="marquee-bubble">Technology</div></div>
+        <div class="marquee-item"><div class="marquee-bubble">Telecom-<br>munications</div></div>
+        <div class="marquee-item"><div class="marquee-bubble">Industrial<br>Services</div></div>
+        <!-- duplicate -->
+        <div class="marquee-item"><div class="marquee-bubble">Financial<br>Services</div></div>
+        <div class="marquee-item"><div class="marquee-bubble">Construc-<br>tion</div></div>
+        <div class="marquee-item"><div class="marquee-bubble">Education</div></div>
+        <div class="marquee-item"><div class="marquee-bubble">Food &amp;<br>Beverage</div></div>
+        <div class="marquee-item"><div class="marquee-bubble">Facilities<br>Mgmt</div></div>
+        <div class="marquee-item"><div class="marquee-bubble">Technology</div></div>
+        <div class="marquee-item"><div class="marquee-bubble">Telecom-<br>munications</div></div>
+        <div class="marquee-item"><div class="marquee-bubble">Industrial<br>Services</div></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════
+       INTRO / PHILOSOPHY
+  ══════════════════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="feature-inner reveal">
+        <div class="feature-text">
+          <span class="eyebrow-num">01 / Our Philosophy</span>
+          <h2>Technology is an enabler. <span style="color:var(--primary)">People</span> make it real.</h2>
+          <p>Penteract partners with you on your journey. As Salesforce.com professionals, we enhance business operations to improve your customer's experience — from strategy through to deployment and beyond.</p>
+          <p>Our team has decades of experience working with organisations that have successfully transformed their businesses by adopting Salesforce.com, taking advantage of the cloud and the best Customer 360 platform available.</p>
+          <a href="about.html" class="feature-link">
+            Our Story
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+            </svg>
+          </a>
+          <div class="feature-stats">
+            <div>
+              <div class="stat-number" data-count="10" data-suffix="+">10+</div>
+              <div class="stat-label">Years Experience</div>
+            </div>
+            <div>
+              <div class="stat-number" data-count="8">8</div>
+              <div class="stat-label">Industries Served</div>
+            </div>
+            <div>
+              <div class="stat-number" data-count="100" data-suffix="%">100%</div>
+              <div class="stat-label">Salesforce Focused</div>
+            </div>
+          </div>
+        </div>
+        <div class="feature-visual">
+          <div class="feature-img-blob"></div>
+          <img src="https://i0.wp.com/penteract.tech/wp-content/uploads/2025/10/Home-Page-2-copy.webp?fit=1024%2C577&ssl=1"
+               alt="Penteract team" class="feature-img-offset" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════
+       SERVICES (numbered)
+  ══════════════════════════ -->
+  <section class="numbered-section" id="services">
+    <div class="container">
+      <div class="numbered-header reveal">
+        <div class="eyebrow">02 / What We Do</div>
+        <h2 class="h-section">End-to-end Salesforce delivery.</h2>
+      </div>
+      <div class="numbered-grid">
+        <div class="num-item reveal reveal-delay-1">
+          <span class="num-item-num">01</span>
+          <h4>Design</h4>
+          <p>Data architecture aligned with your business requirements to support processes, insights, and user experiences that drive customer engagement and technology adoption.</p>
+        </div>
+        <div class="num-item reveal reveal-delay-2">
+          <span class="num-item-num">02</span>
+          <h4>Configure</h4>
+          <p>Utilising the zero-code modification concept, we extend the fundamental platform features to precisely suit your business strategy — fast and without technical debt.</p>
+        </div>
+        <div class="num-item reveal reveal-delay-3">
+          <span class="num-item-num">03</span>
+          <h4>Develop</h4>
+          <p>We improve Salesforce capabilities using the platform's code-based toolsets to satisfy challenging business requirements that go beyond standard configuration.</p>
+        </div>
+        <div class="num-item reveal reveal-delay-4">
+          <span class="num-item-num">04</span>
+          <h4>Manage</h4>
+          <p>We handle routine Salesforce org administration so you stay focused on your core business, with peace of mind that your platform is always optimised and current.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════
+       HOW WE CONNECT THE DOTS
+  ══════════════════════════ -->
+  <section class="dots-section">
+    <div class="container">
+      <div class="dots-header reveal">
+        <div class="eyebrow" style="justify-content:center;">Our Process</div>
+        <h2 class="h-section" style="text-align:center;">How we connect the dots.</h2>
+        <p style="text-align:center; color:var(--text-secondary); font-size:16px; max-width:520px; margin:16px auto 0; line-height:1.7;">Five deliberate steps that take your business from understanding to transformation.</p>
+      </div>
+
+      <div class="dots-grid reveal">
+
+        <div class="dots-step">
+          <div class="dots-step-icon" data-num="01">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+          </div>
+          <h4>Perceive</h4>
+          <p>We spend time with your team to learn about your business, giving us a deeper understanding of your requirements from various perspectives.</p>
+        </div>
+
+        <div class="dots-step">
+          <div class="dots-step-icon" data-num="02">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 010 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 010-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+          </div>
+          <h4>Process</h4>
+          <p>Using our insights into your business, we design capabilities that leverage platform best practices to precisely meet your needs.</p>
+        </div>
+
+        <div class="dots-step">
+          <div class="dots-step-icon" data-num="03">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"/>
+            </svg>
+          </div>
+          <h4>Produce</h4>
+          <p>We transform designs into platform solutions using an agile methodology, giving us the flexibility to pivot as your business evolves.</p>
+        </div>
+
+        <div class="dots-step">
+          <div class="dots-step-icon" data-num="04">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/>
+            </svg>
+          </div>
+          <h4>Promote</h4>
+          <p>Once a feature is ready, we carefully deploy those changes to your production environment — tested, validated, and ready to go live.</p>
+        </div>
+
+        <div class="dots-step dots-step--last">
+          <div class="dots-step-icon dots-step-icon--accent" data-num="05">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/>
+            </svg>
+          </div>
+          <h4>Partner</h4>
+          <p>We believe in partnering with our clients and walking the journey with them. We don't go-live and walk away — we travel together and improve along the way.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════
+       SOLUTIONS LIST
+  ══════════════════════════ -->
+  <section class="solutions-section">
+    <div class="container">
+
+      <div class="solution-row reveal">
+        <div>
+          <div class="solution-label">Sales Cloud</div>
+          <h2>Win more deals, faster.</h2>
+        </div>
+        <div class="solution-body">
+          <p>We configure and extend Salesforce Sales Cloud to give your sales team a single view of every customer, pipeline, and opportunity — from first contact to closed won.</p>
+          <a href="https://penteract.tech/contact-penteract/" class="feature-link">
+            Discuss Your Sales Cloud
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="solution-row reveal">
+        <div>
+          <div class="solution-label">Service Cloud</div>
+          <h2>Delight customers at every touchpoint.</h2>
+        </div>
+        <div class="solution-body">
+          <p>Give your support teams the tools they need to resolve cases faster, reduce escalations, and turn customers into advocates — powered by Service Cloud.</p>
+          <a href="https://penteract.tech/contact-penteract/" class="feature-link">
+            Explore Service Cloud
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="solution-row reveal">
+        <div>
+          <div class="solution-label">Integration</div>
+          <h2>Connect your entire tech stack.</h2>
+        </div>
+        <div class="solution-body">
+          <p>Salesforce doesn't work in isolation. We integrate your CRM with ERP, finance, marketing, and field systems to create a truly unified Customer 360 view.</p>
+          <a href="https://penteract.tech/contact-penteract/" class="feature-link">
+            Talk Integration
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════
+       PENTERACT SYMBOL
+  ══════════════════════════ -->
+  <section class="symbol-section" id="symbol">
+    <div class="symbol-bg-mesh"></div>
+    <div class="container">
+      <div class="symbol-inner">
+
+        <div class="symbol-canvas-wrap reveal">
+          <canvas id="penteractCanvas" width="460" height="460" aria-label="Animated Penteract symbol — a 5-dimensional hypercube"></canvas>
+        </div>
+
+        <div class="symbol-text reveal reveal-delay-2">
+          <div class="eyebrow">The Meaning Behind Our Name</div>
+          <h2>We are the <span>Penteract.</span></h2>
+
+          <p>The <strong>Penteract</strong> is a symbol representing the idea that there are many layers or dimensions to reality that go beyond what our physical senses can perceive. It's believed that this can guide us to raise our consciousness to higher levels of awareness — a process known as <strong>ascension</strong>.</p>
+
+          <p>Think of the Penteract's <strong>five dimensions</strong> as connections between different levels of consciousness. Each level offers a deeper understanding of the nature of reality, helping us to see the <strong>bigger picture</strong> and our place in it.</p>
+
+          <p>One of the most powerful messages of the Penteract is <strong>unity</strong> and <strong>interconnectedness</strong>. It reminds us that we are all part of a larger tapestry, and every action we take has an <strong>impact</strong> that extends far beyond our immediate experience. When we work with our <strong>partners</strong> to revolutionise their businesses, we keep this message in mind — looking to the <strong>future</strong> while executing <strong>now</strong>.</p>
+
+          <div class="symbol-pillars">
+            <div class="symbol-pillar">
+              <div class="symbol-pillar-icon">🔗</div>
+              <span>Unity</span>
+            </div>
+            <div class="symbol-pillar">
+              <div class="symbol-pillar-icon">🌐</div>
+              <span>Connection</span>
+            </div>
+            <div class="symbol-pillar">
+              <div class="symbol-pillar-icon">🚀</div>
+              <span>Ascension</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════
+       TESTIMONIALS
+  ══════════════════════════ -->
+  <section class="testimonials-section">
+    <div class="container">
+      <div class="testimonials-header reveal">
+        <div class="eyebrow" style="justify-content:center;">03 / What Our Clients Say</div>
+        <h2 class="h-section" style="text-align:center; max-width:520px; margin:0 auto;">Partners who connected<br>the dots with us.</h2>
+      </div>
+
+      <div class="testimonials-track-wrap reveal">
+        <div class="testimonials-track" id="testiTrack">
+
+          <div class="testimonial-card">
+            <div class="quote-icon">
+              <svg fill="currentColor" viewBox="0 0 24 24">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+              </svg>
+            </div>
+            <p class="testimonial-quote">"Penteract transformed how our team works. The Salesforce implementation was seamless — they truly understood our business before writing a single line of configuration."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">JS</div>
+              <div>
+                <div class="testimonial-name">Johan S.</div>
+                <div class="testimonial-role">Operations Director, Financial Services</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="quote-icon">
+              <svg fill="currentColor" viewBox="0 0 24 24">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+              </svg>
+            </div>
+            <p class="testimonial-quote">"What sets Penteract apart is how much they care. They're not just a vendor — they're genuine partners in our growth. Our Service Cloud rollout exceeded every expectation."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">NK</div>
+              <div>
+                <div class="testimonial-name">Nadia K.</div>
+                <div class="testimonial-role">Head of Customer Experience, Telecoms</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="quote-icon">
+              <svg fill="currentColor" viewBox="0 0 24 24">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+              </svg>
+            </div>
+            <p class="testimonial-quote">"The team's depth of Salesforce knowledge is remarkable. They solved integration challenges that had stumped other consultants, and delivered on time and on budget."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">RM</div>
+              <div>
+                <div class="testimonial-name">Ryan M.</div>
+                <div class="testimonial-role">CTO, Construction Industry</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="testimonials-nav">
+        <button class="testi-prev" id="testiPrev" aria-label="Previous testimonial">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/>
+          </svg>
+        </button>
+        <div class="carousel-dots" id="testiDots">
+          <button class="carousel-dot active" data-index="0"></button>
+          <button class="carousel-dot" data-index="1"></button>
+          <button class="carousel-dot" data-index="2"></button>
+        </div>
+        <button class="testi-next" id="testiNext" aria-label="Next testimonial">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════
+       CTA BAND
+  ══════════════════════════ -->
+  <section class="cta-band reveal">
+    <div class="blob"></div>
+    <div class="cta-band-inner">
+      <div class="eyebrow" style="justify-content:center; color:var(--primary); margin-bottom:16px;">Dream, Build, Transcend</div>
+      <h2>Ready to connect<br>the dots?</h2>
+      <p>We are passionate about technology and people at Penteract. These are the catalysts that transform businesses and the way you interact with your customers.</p>
+      <div class="cta-band-actions">
+        <a href="https://penteract.tech/contact-penteract/" class="btn btn--primary btn--lg">
+          Get In Touch
+          <span class="btn-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+            </svg>
+          </span>
+        </a>
+        <a href="about.html" class="btn btn--outline btn--lg">About Penteract</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════
+       CONTACT SPLIT
+  ══════════════════════════ -->
+  <section class="contact-split">
+    <div class="container">
+      <div class="contact-inner reveal">
+        <div class="contact-visual">
+          <img src="https://i0.wp.com/penteract.tech/wp-content/uploads/2025/10/Home-Page-2-copy.webp?fit=1024%2C577&ssl=1"
+               alt="Penteract team" loading="lazy">
+          <div class="contact-visual-overlay"></div>
+          <div class="contact-visual-grid"></div>
+          <div class="contact-visual-badge">
+            <span>Based in</span>
+            <strong>South Africa 🇿🇦</strong>
+          </div>
+        </div>
+        <div class="contact-panel">
+          <div class="eyebrow">Contact Us</div>
+          <h2>Let's build something extraordinary together.</h2>
+          <p>Whether you're starting your Salesforce journey or optimising an existing org — we'd love to hear from you.</p>
+          <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:32px;">
+            <a href="mailto:info@penteract.tech" style="font-size:14px; color:var(--text-secondary); display:flex; align-items:center; gap:10px;">
+              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+              info@penteract.tech
+            </a>
+            <a href="tel:+27795289128" style="font-size:14px; color:var(--text-secondary); display:flex; align-items:center; gap:10px;">
+              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+              (+27) 79 528 9128
+            </a>
+          </div>
+          <a href="https://penteract.tech/contact-penteract/" class="btn btn--primary btn--lg">
+            Start a Conversation
+            <span class="btn-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+              </svg>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════
+       FOOTER
+  ══════════════════════════ -->
+  <footer class="footer">
+    <div class="footer-blob"></div>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="index.html" class="footer-logo-wrap">
+            <img src="logo.png" alt="Penteract Technologies" class="footer-logo">
+          </a>
+          <p class="footer-brand-desc">Dream, Build, Transcend. Using our expertise to help you connect the dots.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#symbol">Our Name</a></li>
+            <li><a href="https://penteract.tech/contact-penteract/">Get In Touch</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:info@penteract.tech">info@penteract.tech</a></li>
+            <li><a href="tel:+27795289128">(+27) 79 528 9128</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="https://penteract.tech/cookie-policy-za/">Cookie Policy (ZA)</a></li>
+            <li><a href="https://penteract.tech/our-commitment-to-your-privacy/">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-wordmark">PENTERACT</div>
+      <div class="footer-bottom">
+        <span>&copy; 2025 Penteract Technologies. All rights reserved.</span>
+        <span>Created by <a href="#">Jarryd Lamour</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/penteract.js"></script>
+
+</body>
+</html>

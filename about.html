@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | Penteract Technologies — Trusted Salesforce Consultants</title>
+  <meta name="description" content="Learn about our journey in South Africa's Salesforce ecosystem. Our mission is to transform your business operations with the power of Salesforce technology.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/sections.css">
+
+  <style>
+    /* ── About-page specific styles ── */
+
+    /* Page hero — shorter than homepage */
+    .about-hero {
+      position: relative;
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: var(--dark-900);
+      padding-top: 120px;
+    }
+
+    .about-hero-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .about-hero-mesh-1 {
+      position: absolute;
+      width: 600px; height: 600px;
+      top: -20%; left: -5%;
+      background: radial-gradient(ellipse, rgba(10,173,173,0.18) 0%, transparent 70%);
+      border-radius: 50%;
+      filter: blur(80px);
+      animation: meshMove1 18s ease-in-out infinite;
+    }
+
+    .about-hero-mesh-2 {
+      position: absolute;
+      width: 400px; height: 500px;
+      bottom: -10%; right: 5%;
+      background: radial-gradient(ellipse, rgba(123,92,246,0.12) 0%, transparent 70%);
+      border-radius: 50%;
+      filter: blur(80px);
+      animation: meshMove2 22s ease-in-out infinite 3s;
+    }
+
+    .about-hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 90% 90% at 50% 50%, black 30%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 90% 90% at 50% 50%, black 30%, transparent 100%);
+    }
+
+    .about-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 760px;
+    }
+
+    .about-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: -2.5px;
+      line-height: 1.05;
+      margin-bottom: 24px;
+    }
+
+    .about-hero h1 .gradient-text {
+      background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 60%, #5ee8e8 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .about-hero p {
+      font-size: clamp(16px, 2vw, 19px);
+      color: rgba(255,255,255,0.55);
+      font-weight: 300;
+      line-height: 1.7;
+      max-width: 580px;
+    }
+
+    /* ── Mission / Vision split ── */
+    .mission-section {
+      padding: 100px 0 80px;
+    }
+
+    .mission-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .mission-card {
+      border-radius: var(--radius-lg);
+      padding: 52px 44px;
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mission-card--mission {
+      background: var(--dark-800);
+      border-color: rgba(10,173,173,0.15);
+    }
+
+    .mission-card--vision {
+      background: var(--bg-surface);
+    }
+
+    .mission-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--primary-light));
+    }
+
+    .mission-card--mission .mission-label {
+      color: rgba(255,255,255,0.4);
+    }
+
+    .mission-card--mission h3 {
+      color: #fff;
+    }
+
+    .mission-card--mission p {
+      color: rgba(255,255,255,0.6);
+    }
+
+    .mission-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mission-label::before {
+      content: '';
+      display: block;
+      width: 16px; height: 2px;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+
+    .mission-card h3 {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 600;
+      letter-spacing: -0.5px;
+      line-height: 1.3;
+      margin-bottom: 16px;
+      color: var(--text-primary);
+    }
+
+    .mission-card p {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--text-secondary);
+    }
+
+    /* ── Values ── */
+    .values-section {
+      padding: 80px 0 100px;
+      background: var(--bg-subtle);
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .value-card {
+      background: var(--bg-surface);
+      border-radius: var(--radius-lg);
+      padding: 36px 28px;
+      border: 1px solid var(--border);
+      transition: transform var(--duration-base) var(--ease-out), box-shadow var(--duration-base);
+    }
+
+    .value-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .value-icon {
+      width: 48px; height: 48px;
+      background: var(--primary-glow);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .value-icon svg {
+      width: 22px; height: 22px;
+      color: var(--primary);
+    }
+
+    .value-card h4 {
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--text-primary);
+      letter-spacing: -0.2px;
+    }
+
+    .value-card p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+    }
+
+    /* ── Story / Journey timeline ── */
+    .story-section {
+      padding: 80px 0 100px;
+    }
+
+    .story-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .story-text h2 {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 3.5vw, 42px);
+      font-weight: 600;
+      letter-spacing: -1px;
+      line-height: 1.15;
+      color: var(--text-primary);
+      margin-bottom: 24px;
+    }
+
+    .story-text h2 .accent { color: var(--primary); }
+
+    .story-text p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.85;
+      margin-bottom: 20px;
+    }
+
+    /* Timeline */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 12px; bottom: 12px;
+      left: 15px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--primary), rgba(10,173,173,0.15));
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 24px;
+      padding-bottom: 36px;
+      position: relative;
+    }
+
+    .timeline-item:last-child { padding-bottom: 0; }
+
+    .timeline-dot {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--primary-glow);
+      border: 2px solid var(--primary);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .timeline-dot svg {
+      width: 14px; height: 14px;
+      color: var(--primary);
+    }
+
+    .timeline-body h4 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+      letter-spacing: -0.2px;
+    }
+
+    .timeline-body p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* ── Salesforce Partner badge ── */
+    .partner-section {
+      padding: 80px 0 100px;
+      background: var(--dark-800);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .partner-section::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -100px;
+      width: 600px; height: 600px;
+      background: radial-gradient(ellipse, rgba(10,173,173,0.10) 0%, transparent 65%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .partner-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .partner-text .eyebrow {
+      color: rgba(255,255,255,0.4);
+    }
+
+    .partner-text .eyebrow::before {
+      background: var(--primary);
+    }
+
+    .partner-text h2 {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 3.5vw, 42px);
+      font-weight: 600;
+      letter-spacing: -1px;
+      line-height: 1.15;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+
+    .partner-text p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .partner-badges {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .partner-badge {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      text-align: center;
+      transition: border-color var(--duration-base), background var(--duration-base);
+    }
+
+    .partner-badge:hover {
+      background: rgba(10,173,173,0.08);
+      border-color: rgba(10,173,173,0.25);
+    }
+
+    .partner-badge-icon {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .partner-badge strong {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 4px;
+    }
+
+    .partner-badge span {
+      font-size: 11px;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.5px;
+    }
+
+    /* ── Why choose us ── */
+    .why-section {
+      padding: 80px 0 100px;
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .why-item {
+      display: flex;
+      gap: 20px;
+      padding: 28px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      transition: border-color var(--duration-base), background var(--duration-base);
+      background: var(--bg-surface);
+    }
+
+    .why-item:hover {
+      border-color: rgba(10,173,173,0.2);
+      background: rgba(10,173,173,0.02);
+    }
+
+    .why-item-num {
+      font-family: var(--font-display);
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--primary-glow);
+      letter-spacing: -2px;
+      line-height: 1;
+      flex-shrink: 0;
+      min-width: 44px;
+      transition: color var(--duration-base);
+    }
+
+    .why-item:hover .why-item-num {
+      color: var(--primary);
+    }
+
+    .why-item h4 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+
+    .why-item p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* ── Industry section (matching homepage) ── */
+    .about-industries {
+      padding: 80px 0 100px;
+      background: var(--bg-subtle);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .mission-grid { grid-template-columns: 1fr; }
+      .values-grid  { grid-template-columns: repeat(2, 1fr); }
+      .story-layout { grid-template-columns: 1fr; gap: 48px; }
+      .partner-inner { grid-template-columns: 1fr; gap: 40px; }
+      .why-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .values-grid { grid-template-columns: 1fr; }
+      .partner-badges { grid-template-columns: 1fr 1fr; }
+      .about-hero { min-height: 60vh; }
+    }
+
+    /* ── Penteract symbol (shared with index) ── */
+    .symbol-section {
+      padding: 110px 0;
+      background: var(--dark-800);
+      position: relative;
+      overflow: hidden;
+    }
+    .symbol-bg-mesh {
+      position: absolute;
+      width: 700px; height: 700px;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(ellipse, rgba(10,173,173,0.10) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: glowPulse 6s ease-in-out infinite;
+    }
+    .symbol-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .symbol-canvas-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #penteractCanvas {
+      width: 100%;
+      max-width: 460px;
+      aspect-ratio: 1;
+      display: block;
+    }
+    .symbol-text .eyebrow {
+      color: rgba(255,255,255,0.4);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .symbol-text .eyebrow::before {
+      content: '';
+      display: block;
+      width: 20px; height: 2px;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+    .symbol-text h2 {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      color: #fff;
+      margin-bottom: 28px;
+    }
+    .symbol-text h2 span { color: var(--primary); }
+    .symbol-text p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.85;
+      margin-bottom: 18px;
+    }
+    .symbol-text p strong { color: rgba(255,255,255,0.85); font-weight: 600; }
+    .symbol-pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 32px;
+    }
+    .symbol-pillar {
+      padding: 16px 14px;
+      border-radius: var(--radius-md);
+      background: rgba(10,173,173,0.08);
+      border: 1px solid rgba(10,173,173,0.18);
+      text-align: center;
+      transition: background var(--duration-base), border-color var(--duration-base);
+    }
+    .symbol-pillar:hover {
+      background: rgba(10,173,173,0.14);
+      border-color: rgba(10,173,173,0.36);
+    }
+    .symbol-pillar-icon { font-size: 22px; margin-bottom: 8px; }
+    .symbol-pillar span {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--primary);
+    }
+    @media (max-width: 768px) {
+      .symbol-inner { grid-template-columns: 1fr; gap: 48px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════
+       NAVBAR
+  ═══════════════════════════════ -->
+  <div class="nav-wrap">
+    <nav class="nav-pill">
+      <a href="index.html" class="nav-logo-wrap">
+        <img src="logo.png" alt="Penteract Technologies" class="nav-logo">
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html" class="active">About Us</a></li>
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="#symbol">Our Name</a></li>
+        <li>
+          <a href="https://penteract.tech/contact-penteract/" class="nav-cta-link">
+            Get In Touch
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+
+  <!-- ═══════════════════════════════
+       ABOUT HERO
+  ═══════════════════════════════ -->
+  <section class="about-hero">
+    <div class="about-hero-bg">
+      <div class="about-hero-mesh-1"></div>
+      <div class="about-hero-mesh-2"></div>
+      <div class="about-hero-grid"></div>
+    </div>
+    <div class="container">
+      <div class="about-hero-content">
+        <div class="hero-eyebrow hero-animate-1">
+          <span class="dot"></span>
+          Trusted Salesforce Consultants
+        </div>
+        <h1 class="hero-animate-2">
+          We are<br><span class="gradient-text">Penteract.</span>
+        </h1>
+        <p class="hero-animate-3">
+          A South African Salesforce consulting partner on a mission to transform your business operations — by partnering with you, not just delivering to you.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════
+       MISSION & VISION
+  ═══════════════════════════════ -->
+  <section class="mission-section">
+    <div class="container">
+      <div class="mission-grid reveal">
+
+        <div class="mission-card mission-card--mission">
+          <div class="mission-label">Our Mission</div>
+          <h3>To transform your business operations with the power of Salesforce technology.</h3>
+          <p>We partner with you on your journey. As Salesforce.com professionals, we enhance business operations to improve your customer's experience — from strategy through to deployment and beyond.</p>
+        </div>
+
+        <div class="mission-card mission-card--vision">
+          <div class="mission-label">Our Vision</div>
+          <h3>Dream, Build, Transcend — for every client, every time.</h3>
+          <p>Technology is an enabler. Our strategy is to show that when the right people, the right processes, and the right platform come together, businesses genuinely transcend what they thought was possible.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════
+       STORY / JOURNEY
+  ═══════════════════════════════ -->
+  <section class="story-section">
+    <div class="container">
+      <div class="story-layout">
+
+        <div class="story-text reveal">
+          <div class="eyebrow">Our Story</div>
+          <h2>Built on experience,<br>driven by <span class="accent">people.</span></h2>
+          <p>
+            Penteract Technologies was founded with a simple belief: technology should serve people, not the other way around. We set out to bridge the gap between what Salesforce can do and what businesses actually need.
+          </p>
+          <p>
+            Our team has decades of experience working with organisations that have successfully transformed their businesses by adopting Salesforce.com — taking advantage of the cloud and the best Customer 360 platform available.
+          </p>
+          <p>
+            Based in South Africa, we bring global expertise with local understanding. We would love to demonstrate how our expertise and team members set us apart.
+          </p>
+          <a href="https://penteract.tech/contact-penteract/" class="btn btn--primary" style="margin-top: 8px;">
+            Work With Us
+            <span class="btn-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+              </svg>
+            </span>
+          </a>
+        </div>
+
+        <div class="timeline reveal reveal-delay-2">
+          <div class="timeline-item">
+            <div class="timeline-dot">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2m6-2a10 10 0 11-20 0 10 10 0 0120 0z"/>
+              </svg>
+            </div>
+            <div class="timeline-body">
+              <h4>Founded</h4>
+              <p>Penteract Technologies was established with a clear focus on Salesforce consulting in the South African market.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+              </svg>
+            </div>
+            <div class="timeline-body">
+              <h4>Salesforce Partner Status</h4>
+              <p>Achieved official Salesforce Consulting Partner status, recognising our team's certified expertise and delivery track record.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+            </div>
+            <div class="timeline-body">
+              <h4>Growing Our Team</h4>
+              <p>Expanded our team of certified Salesforce professionals spanning Sales Cloud, Service Cloud, Marketing Cloud, and more.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"/>
+              </svg>
+            </div>
+            <div class="timeline-body">
+              <h4>8 Industries Served</h4>
+              <p>From Financial Services to Industrial, our footprint spans 8 key sectors across the South African economy and beyond.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════
+       VALUES
+  ═══════════════════════════════ -->
+  <section class="values-section">
+    <div class="container">
+      <div class="reveal">
+        <div class="eyebrow">What Drives Us</div>
+        <h2 class="h-section" style="max-width: 500px;">Our values shape every engagement.</h2>
+      </div>
+
+      <div class="values-grid">
+
+        <div class="value-card reveal reveal-delay-1">
+          <div class="value-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z"/>
+            </svg>
+          </div>
+          <h4>People First</h4>
+          <p>We believe technology only succeeds when it truly serves the people using it. Every solution starts and ends with the human experience.</p>
+        </div>
+
+        <div class="value-card reveal reveal-delay-2">
+          <div class="value-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"/>
+            </svg>
+          </div>
+          <h4>Integrity &amp; Trust</h4>
+          <p>We are honest about what is and isn't possible. We build lasting relationships through transparency, accountability, and delivering on our word.</p>
+        </div>
+
+        <div class="value-card reveal reveal-delay-3">
+          <div class="value-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/>
+            </svg>
+          </div>
+          <h4>Innovation</h4>
+          <p>We stay at the forefront of the Salesforce platform, continuously learning so our clients always benefit from the latest capabilities and best practices.</p>
+        </div>
+
+        <div class="value-card reveal reveal-delay-1">
+          <div class="value-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/>
+            </svg>
+          </div>
+          <h4>True Partnership</h4>
+          <p>We don't just deliver a project and move on. We invest in understanding your business deeply and stay invested in your long-term success.</p>
+        </div>
+
+        <div class="value-card reveal reveal-delay-2">
+          <div class="value-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"/>
+            </svg>
+          </div>
+          <h4>Measurable Impact</h4>
+          <p>We measure success by the real-world outcomes our clients achieve — improved efficiency, better customer experiences, and sustainable growth.</p>
+        </div>
+
+        <div class="value-card reveal reveal-delay-3">
+          <div class="value-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"/>
+            </svg>
+          </div>
+          <h4>Expertise &amp; Craft</h4>
+          <p>Our team holds multiple Salesforce certifications across clouds and disciplines — we take pride in doing things properly, every time.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════
+       SALESFORCE PARTNER
+  ═══════════════════════════════ -->
+  <section class="partner-section">
+    <div class="container">
+      <div class="partner-inner reveal">
+
+        <div class="partner-text">
+          <div class="eyebrow">Salesforce Ecosystem</div>
+          <h2>Certified. Connected. Committed.</h2>
+          <p>
+            As an official Salesforce Consulting Partner, Penteract has demonstrated the skills, customer success track record, and expertise required to deliver Salesforce solutions.
+          </p>
+          <p>
+            Our team carries certifications across the full breadth of the Salesforce platform — ensuring that whatever your challenge, we have the certified expertise to solve it.
+          </p>
+          <a href="https://penteract.tech/contact-penteract/" class="btn btn--primary" style="margin-top: 8px;">
+            Talk to a Consultant
+            <span class="btn-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+              </svg>
+            </span>
+          </a>
+        </div>
+
+        <div class="partner-badges">
+          <div class="partner-badge">
+            <div class="partner-badge-icon">☁️</div>
+            <strong>Sales Cloud</strong>
+            <span>Certified</span>
+          </div>
+          <div class="partner-badge">
+            <div class="partner-badge-icon">🎧</div>
+            <strong>Service Cloud</strong>
+            <span>Certified</span>
+          </div>
+          <div class="partner-badge">
+            <div class="partner-badge-icon">📊</div>
+            <strong>Marketing Cloud</strong>
+            <span>Certified</span>
+          </div>
+          <div class="partner-badge">
+            <div class="partner-badge-icon">⚡</div>
+            <strong>Platform Dev</strong>
+            <span>Certified</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════
+       WHY PENTERACT
+  ═══════════════════════════════ -->
+  <section class="why-section">
+    <div class="container">
+      <div class="reveal">
+        <div class="eyebrow">Why Penteract</div>
+        <h2 class="h-section" style="max-width: 480px;">What sets us apart from the rest.</h2>
+      </div>
+
+      <div class="why-grid">
+        <div class="why-item reveal reveal-delay-1">
+          <div class="why-item-num">01</div>
+          <div>
+            <h4>South African Roots, Global Standards</h4>
+            <p>We understand the local business landscape deeply while applying international Salesforce best practices. You get global expertise without the distance.</p>
+          </div>
+        </div>
+        <div class="why-item reveal reveal-delay-2">
+          <div class="why-item-num">02</div>
+          <div>
+            <h4>Decades of Combined Experience</h4>
+            <p>Our team's collective experience spans the full breadth of the Salesforce platform, across industries from Financial Services to Industrial.</p>
+          </div>
+        </div>
+        <div class="why-item reveal reveal-delay-3">
+          <div class="why-item-num">03</div>
+          <div>
+            <h4>End-to-End Delivery</h4>
+            <p>From initial design and architecture through to development, go-live, and ongoing managed support — we own the full lifecycle with you.</p>
+          </div>
+        </div>
+        <div class="why-item reveal reveal-delay-4">
+          <div class="why-item-num">04</div>
+          <div>
+            <h4>Passion-Driven Team</h4>
+            <p>We are genuinely passionate about technology and people. That passion translates into solutions built with care, not just delivered by obligation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════
+       INDUSTRY EXPERIENCE
+  ═══════════════════════════════ -->
+  <section class="about-industries">
+    <div class="container">
+      <div class="expertise-header reveal">
+        <div>
+          <div class="eyebrow">Industry Experience</div>
+          <h2 class="h-section">8 industries.<br>One platform.</h2>
+        </div>
+        <p style="max-width: 300px; font-size: 14px; color: var(--text-muted); line-height: 1.75;">
+          Deep domain knowledge means we speak your language from day one.
+        </p>
+      </div>
+
+      <div class="listing-grid reveal">
+        <div>
+          <div class="listing-item">
+            <span class="listing-item-name">Financial Services</span>
+            <span class="listing-item-tag">CRM &amp; Data</span>
+          </div>
+          <div class="listing-item">
+            <span class="listing-item-name">Construction</span>
+            <span class="listing-item-tag">Field Operations</span>
+          </div>
+          <div class="listing-item">
+            <span class="listing-item-name">Education</span>
+            <span class="listing-item-tag">Student 360</span>
+          </div>
+          <div class="listing-item">
+            <span class="listing-item-name">Food &amp; Beverage</span>
+            <span class="listing-item-tag">Supply Chain</span>
+          </div>
+        </div>
+        <div>
+          <div class="listing-item">
+            <span class="listing-item-name">Facilities Management</span>
+            <span class="listing-item-tag">Service Cloud</span>
+          </div>
+          <div class="listing-item">
+            <span class="listing-item-name">Technology</span>
+            <span class="listing-item-tag">Platform Build</span>
+          </div>
+          <div class="listing-item">
+            <span class="listing-item-name">Telecommunications</span>
+            <span class="listing-item-tag">Integration</span>
+          </div>
+          <div class="listing-item">
+            <span class="listing-item-name">Industrial Services</span>
+            <span class="listing-item-tag">Automation</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════
+       PENTERACT SYMBOL
+  ═══════════════════════════════ -->
+  <section class="symbol-section" id="symbol">
+    <div class="symbol-bg-mesh"></div>
+    <div class="container">
+      <div class="symbol-inner">
+
+        <div class="symbol-canvas-wrap reveal">
+          <canvas id="penteractCanvas" width="460" height="460" aria-label="Animated Penteract 5D hypercube symbol"></canvas>
+        </div>
+
+        <div class="symbol-text reveal reveal-delay-2">
+          <div class="eyebrow">The Meaning Behind Our Name</div>
+          <h2>We are the <span>Penteract.</span></h2>
+
+          <p>The <strong>Penteract</strong> is a symbol representing the idea that there are many layers or dimensions to reality that go beyond what our physical senses can perceive. It guides us to raise our consciousness to higher levels of awareness — a process known as <strong>ascension</strong>.</p>
+
+          <p>Think of the Penteract's <strong>five dimensions</strong> as connections between different levels of consciousness. Each level offers a deeper understanding of the nature of reality, helping us see the <strong>bigger picture</strong> and our place in it.</p>
+
+          <p>One of the most powerful messages of the Penteract is <strong>unity</strong> and <strong>interconnectedness</strong>. It reminds us we are all part of a larger tapestry, and every action we take has an <strong>impact</strong> that extends far beyond our immediate experience. When we work with our <strong>partners</strong> to revolutionise their businesses, we look to the <strong>future</strong> while executing <strong>now</strong> — knowing every step is part of a larger journey towards greater <strong>understanding</strong> and <strong>connection</strong>.</p>
+
+          <div class="symbol-pillars">
+            <div class="symbol-pillar">
+              <div class="symbol-pillar-icon">🔗</div>
+              <span>Unity</span>
+            </div>
+            <div class="symbol-pillar">
+              <div class="symbol-pillar-icon">🌐</div>
+              <span>Connection</span>
+            </div>
+            <div class="symbol-pillar">
+              <div class="symbol-pillar-icon">🚀</div>
+              <span>Ascension</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════
+       CTA
+  ═══════════════════════════════ -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-inner reveal">
+        <div class="cta-visual">
+          <img src="https://i0.wp.com/penteract.tech/wp-content/uploads/2025/10/Home-Page-2-copy.webp?fit=1024%2C577&ssl=1"
+               alt="Penteract team" loading="lazy">
+          <div class="cta-visual-overlay"></div>
+          <div class="cta-visual-grid"></div>
+          <div class="cta-visual-badge">
+            <span>Based in</span>
+            <strong>South Africa 🇿🇦</strong>
+          </div>
+        </div>
+        <div class="cta-panel">
+          <div class="eyebrow">Get In Touch</div>
+          <h2>Let's connect<br>the dots together.</h2>
+          <p>Whether you're starting fresh with Salesforce or looking to take your existing org to the next level — we'd love to hear from you.</p>
+          <a href="https://penteract.tech/contact-penteract/" class="btn btn--primary btn--lg">
+            Start a Conversation
+            <span class="btn-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+              </svg>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════
+       FOOTER
+  ═══════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="index.html" class="footer-logo-wrap">
+            <img src="logo.png" alt="Penteract Technologies" class="footer-logo">
+          </a>
+          <p class="footer-brand-desc">Dream, Build, Transcend. Using our expertise to help you connect the dots.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="https://penteract.tech/contact-penteract/">Get In Touch</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:info@penteract.tech">info@penteract.tech</a></li>
+            <li><a href="tel:+27795289128">(+27) 79 528 9128</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="https://penteract.tech/cookie-policy-za/">Cookie Policy (ZA)</a></li>
+            <li><a href="https://penteract.tech/our-commitment-to-your-privacy/">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-watermark">PENTERACT</div>
+      <div class="footer-bottom">
+        <span>&copy; 2025 Penteract Technologies. All rights reserved.</span>
+        <span>Created by <a href="#">Jarryd Lamour</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/penteract.js"></script>
+
+</body>
+</html>

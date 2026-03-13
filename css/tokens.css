@@ -1,0 +1,75 @@
+/* ─── DESIGN TOKENS — Penteract Redesign ─── */
+:root {
+  /* ── Brand ── */
+  --primary:         #0AADAD;
+  --primary-dark:    #088F8F;
+  --primary-light:   #12CFCF;
+  --primary-glow:    rgba(10, 173, 173, 0.18);
+  --primary-glow-sm: rgba(10, 173, 173, 0.08);
+
+  /* ── Dark palette ── */
+  --dark-900:        #020D18;
+  --dark-800:        #031427;   /* deep charcoal — headings */
+  --dark-700:        #06284C;   /* deep navy — solution cards */
+  --dark-600:        #053040;   /* dark teal — alternate cards */
+
+  /* ── Neutrals ── */
+  --muted:           #5E748D;   /* nav links, body text */
+  --text-primary:    #031427;
+  --text-secondary:  #5E748D;
+  --text-muted:      #7A93AE;
+  --text-faint:      #B0C3D4;
+
+  /* ── Backgrounds ── */
+  --bg-body:         #F8FAFB;
+  --bg-surface:      #FFFFFF;
+  --bg-subtle:       #EEF7F7;
+  --bg-lavender:     #E8F4F4;
+  --bg-nav:          rgba(255, 255, 255, 0.79);
+
+  /* ── Tints ── */
+  --tint-light:      #C6EDED;   /* icon bg, highlights */
+  --accent-pink:     #CE5088;
+  --accent-purple:   #4A1060;
+  --mint:            #97CEAD;   /* arrow circle buttons */
+
+  /* ── Borders ── */
+  --border:          #DDE6EE;
+  --border-light:    rgba(198, 237, 237, 0.45);
+
+  /* ── Shadows ── */
+  --shadow-card:     0 4px 24px rgba(3, 20, 39, 0.08);
+  --shadow-sm:       0 2px 8px  rgba(3, 20, 39, 0.06);
+  --shadow-md:       0 8px 32px rgba(3, 20, 39, 0.08);
+  --shadow-lg:       0 20px 60px rgba(3, 20, 39, 0.10);
+  --shadow-glow:     0 0 40px rgba(10, 173, 173, 0.22);
+
+  /* ── Typography ── */
+  --font:         -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: 'Poppins', sans-serif;
+
+  /* ── Spacing ── */
+  --space-xs:    4px;
+  --space-sm:    8px;
+  --space-md:   16px;
+  --space-lg:   24px;
+  --space-xl:   40px;
+  --space-2xl:  64px;
+  --space-3xl:  96px;
+  --space-4xl: 120px;
+
+  /* ── Layout ── */
+  --max-w:       1200px;
+  --radius-sm:   8px;
+  --radius-md:   16px;
+  --radius-lg:   24px;
+  --radius-xl:   32px;
+  --radius-pill: 50px;
+
+  /* ── Transitions ── */
+  --ease-out:    cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast: 180ms;
+  --duration-base: 280ms;
+  --duration-slow: 500ms;
+}

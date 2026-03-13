@@ -1,0 +1,119 @@
+/* ─── ANIMATIONS ─── */
+
+/* ── Entrance ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Button wobble ── */
+@keyframes wobble-horizontal {
+  16.65% { transform: translateX(8px); }
+  33.3%  { transform: translateX(-6px); }
+  49.95% { transform: translateX(4px); }
+  66.6%  { transform: translateX(-2px); }
+  83.25% { transform: translateX(1px); }
+  100%   { transform: translateX(0); }
+}
+
+/* ── Blob morph ── */
+@keyframes blobMorph {
+  0%   { border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%; }
+  33%  { border-radius: 40% 60% 30% 70% / 70% 30% 60% 40%; }
+  66%  { border-radius: 30% 70% 40% 60% / 60% 40% 70% 30%; }
+  100% { border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%; }
+}
+
+/* ── Hero mesh float ── */
+@keyframes meshMove1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(50px, -60px) scale(1.08); }
+  66%       { transform: translate(-30px, 40px) scale(0.96); }
+}
+@keyframes meshMove2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  40%       { transform: translate(-60px, 30px) scale(1.06); }
+  80%       { transform: translate(50px, -50px) scale(1.1); }
+}
+@keyframes meshMove3 {
+  0%, 100% { transform: translate(0, 0); }
+  50%       { transform: translate(30px, 60px) scale(0.92); }
+}
+
+/* ── Logo marquee ── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── Particle float ── */
+@keyframes particleFloat {
+  0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+  10%  { opacity: 0.7; }
+  90%  { opacity: 0.4; }
+  100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+}
+
+/* ── Glow pulse ── */
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50%       { opacity: 1; transform: scale(1.06); }
+}
+
+/* ── Noise drift ── */
+@keyframes noiseDrift {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(-2%, -1%); }
+  50%  { transform: translate(1%, 2%); }
+  75%  { transform: translate(-1%, 1%); }
+  100% { transform: translate(0, 0); }
+}
+
+/* ── Grid fade in ── */
+@keyframes gridFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Counter up ── */
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Float bob ── */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
+}
+
+/* ── Spin slow ── */
+@keyframes spinSlow {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Ring pulse ── */
+@keyframes ringPulse {
+  0%, 100% { transform: scale(1); opacity: 0.15; }
+  50%       { transform: scale(1.04); opacity: 0.08; }
+}
+
+/* ── Hero text entrance helpers ── */
+.hero-animate-1 { opacity: 0; animation: fadeUp 0.9s var(--ease-out) 0.15s forwards; }
+.hero-animate-2 { opacity: 0; animation: fadeUp 0.9s var(--ease-out) 0.30s forwards; }
+.hero-animate-3 { opacity: 0; animation: fadeUp 0.9s var(--ease-out) 0.45s forwards; }
+.hero-animate-4 { opacity: 0; animation: fadeUp 0.9s var(--ease-out) 0.60s forwards; }
+.hero-animate-5 { opacity: 0; animation: fadeUp 0.9s var(--ease-out) 0.75s forwards; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
