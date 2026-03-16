@@ -20,17 +20,41 @@
   <link rel="stylesheet" href="css/sections.css">
 
   <style>
-    /* ── About-page specific styles ── */
+    /* ════════════════════════════
+       NAV — dark glass for dark-hero page
+    ════════════════════════════ */
+    .nav-pill {
+      background: rgba(20, 18, 18, 0.72);
+      border-color: rgba(255,255,255,0.09);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.28);
+    }
+    .nav-pill.scrolled {
+      box-shadow: 0 8px 48px rgba(0,0,0,0.38);
+    }
+    .nav-links a { color: rgba(255,255,255,0.70); }
+    .nav-links a:hover { color: #fff; background: rgba(255,255,255,0.09); }
+    .nav-links a.active { color: #00A859 !important; font-weight: 600; }
+    .nav-logo { filter: brightness(0) invert(1) drop-shadow(0 0 6px rgba(0,168,89,0.25)); }
+    .nav-toggle span { background: rgba(255,255,255,0.82); }
+    /* Mobile menu retains readable colours */
+    @media (max-width: 768px) {
+      .nav-links { background: #1a1919; border-color: rgba(255,255,255,0.10); }
+      .nav-links a { color: rgba(255,255,255,0.80); }
+      .nav-links a:hover { color: #fff; }
+    }
 
-    /* Page hero — shorter than homepage */
+    /* ════════════════════════════
+       ABOUT HERO
+    ════════════════════════════ */
     .about-hero {
       position: relative;
-      min-height: 70vh;
+      min-height: 62vh;
       display: flex;
       align-items: center;
       overflow: hidden;
       background: var(--dark-900);
       padding-top: 120px;
+      padding-bottom: 80px;
     }
 
     .about-hero-bg {
@@ -93,23 +117,27 @@
       -webkit-text-fill-color: transparent;
     }
 
+    /* WCAG AA contrast fix — was 0.55 opacity */
     .about-hero p {
       font-size: clamp(16px, 2vw, 19px);
-      color: rgba(255,255,255,0.55);
+      color: rgba(255,255,255,0.88);
       font-weight: 300;
       line-height: 1.7;
       max-width: 580px;
     }
 
-    /* ── Mission / Vision split ── */
+    /* ════════════════════════════
+       MISSION / VISION
+    ════════════════════════════ */
     .mission-section {
-      padding: 100px 0 80px;
+      padding: 100px 0 48px; /* reduced bottom gap to Our Story */
     }
 
     .mission-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 32px;
+      align-items: stretch;
     }
 
     .mission-card {
@@ -118,6 +146,8 @@
       border: 1px solid var(--border);
       position: relative;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
 
     .mission-card--mission {
@@ -137,16 +167,19 @@
       background: linear-gradient(90deg, var(--primary), var(--primary-light));
     }
 
-    .mission-card--mission .mission-label {
-      color: rgba(255,255,255,0.4);
+    /* Higher specificity to ensure white label on dark card */
+    .mission-card.mission-card--mission .mission-label {
+      color: rgba(255,255,255,0.65);
     }
 
-    .mission-card--mission h3 {
+    /* Higher specificity to ensure white heading on dark card */
+    .mission-card.mission-card--mission h3 {
       color: #fff;
     }
 
-    .mission-card--mission p {
-      color: rgba(255,255,255,0.6);
+    /* WCAG AA contrast fix — was 0.60 opacity */
+    .mission-card.mission-card--mission p {
+      color: rgba(255,255,255,0.85);
     }
 
     .mission-label {
@@ -167,6 +200,7 @@
       width: 16px; height: 2px;
       background: var(--primary);
       border-radius: 2px;
+      flex-shrink: 0;
     }
 
     .mission-card h3 {
@@ -185,7 +219,9 @@
       color: var(--text-secondary);
     }
 
-    /* ── Values ── */
+    /* ════════════════════════════
+       VALUES
+    ════════════════════════════ */
     .values-section {
       padding: 80px 0 100px;
       background: var(--bg-subtle);
@@ -203,16 +239,21 @@
       border-radius: var(--radius-lg);
       padding: 36px 28px;
       border: 1px solid var(--border);
-      transition: transform var(--duration-base) var(--ease-out), box-shadow var(--duration-base);
+      transition:
+        transform var(--duration-base) var(--ease-out),
+        box-shadow var(--duration-base),
+        border-color var(--duration-base);
     }
 
     .value-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-md);
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(35,33,33,0.11);
+      border-color: rgba(0, 168, 89, 0.30);
     }
 
+    /* Larger icon container — more breathing room */
     .value-icon {
-      width: 48px; height: 48px;
+      width: 56px; height: 56px;
       background: var(--primary-glow);
       border-radius: var(--radius-md);
       display: flex;
@@ -222,7 +263,7 @@
     }
 
     .value-icon svg {
-      width: 22px; height: 22px;
+      width: 24px; height: 24px;
       color: var(--primary);
     }
 
@@ -240,9 +281,11 @@
       line-height: 1.75;
     }
 
-    /* ── Story / Journey timeline ── */
+    /* ════════════════════════════
+       STORY / JOURNEY TIMELINE
+    ════════════════════════════ */
     .story-section {
-      padding: 80px 0 100px;
+      padding: 48px 0 100px; /* reduced top gap from Mission section */
     }
 
     .story-layout {
@@ -298,8 +341,7 @@
     .timeline-item:last-child { padding-bottom: 0; }
 
     .timeline-dot {
-      width: 32px;
-      height: 32px;
+      width: 32px; height: 32px;
       border-radius: 50%;
       background: var(--primary-glow);
       border: 2px solid var(--primary);
@@ -311,10 +353,7 @@
       z-index: 1;
     }
 
-    .timeline-dot svg {
-      width: 14px; height: 14px;
-      color: var(--primary);
-    }
+    .timeline-dot svg { width: 14px; height: 14px; color: var(--primary); }
 
     .timeline-body h4 {
       font-size: 15px;
@@ -330,7 +369,9 @@
       line-height: 1.65;
     }
 
-    /* ── Salesforce Partner badge ── */
+    /* ════════════════════════════
+       SALESFORCE PARTNER
+    ════════════════════════════ */
     .partner-section {
       padding: 80px 0 100px;
       background: var(--dark-800);
@@ -355,13 +396,8 @@
       align-items: center;
     }
 
-    .partner-text .eyebrow {
-      color: rgba(255,255,255,0.4);
-    }
-
-    .partner-text .eyebrow::before {
-      background: var(--primary);
-    }
+    .partner-text .eyebrow { color: rgba(255,255,255,0.4); }
+    .partner-text .eyebrow::before { background: var(--primary); }
 
     .partner-text h2 {
       font-family: var(--font-display);
@@ -375,22 +411,24 @@
 
     .partner-text p {
       font-size: 15px;
-      color: rgba(255,255,255,0.55);
+      color: rgba(255,255,255,0.65);
       line-height: 1.8;
       margin-bottom: 20px;
     }
 
+    /* 2×2 badge grid — centred within its column */
     .partner-badges {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 16px;
+      align-self: center;
     }
 
     .partner-badge {
       background: rgba(255,255,255,0.05);
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: var(--radius-md);
-      padding: 20px;
+      padding: 24px 20px;
       text-align: center;
       transition: border-color var(--duration-base), background var(--duration-base);
     }
@@ -400,10 +438,7 @@
       border-color: rgba(0, 168, 89, 0.25);
     }
 
-    .partner-badge-icon {
-      font-size: 28px;
-      margin-bottom: 10px;
-    }
+    .partner-badge-icon { font-size: 28px; margin-bottom: 10px; }
 
     .partner-badge strong {
       display: block;
@@ -415,14 +450,14 @@
 
     .partner-badge span {
       font-size: 11px;
-      color: rgba(255,255,255,0.35);
+      color: rgba(255,255,255,0.40);
       letter-spacing: 0.5px;
     }
 
-    /* ── Why choose us ── */
-    .why-section {
-      padding: 80px 0 100px;
-    }
+    /* ════════════════════════════
+       WHY PENTERACT
+    ════════════════════════════ */
+    .why-section { padding: 80px 0 100px; }
 
     .why-grid {
       display: grid;
@@ -458,9 +493,7 @@
       transition: color var(--duration-base);
     }
 
-    .why-item:hover .why-item-num {
-      color: var(--primary);
-    }
+    .why-item:hover .why-item-num { color: var(--primary); }
 
     .why-item h4 {
       font-size: 16px;
@@ -475,34 +508,80 @@
       line-height: 1.7;
     }
 
-    /* ── Industry section (matching homepage) ── */
+    /* ════════════════════════════
+       INDUSTRY EXPERIENCE
+    ════════════════════════════ */
     .about-industries {
       padding: 80px 0 100px;
       background: var(--bg-subtle);
     }
 
-    /* ── Responsive ── */
-    @media (max-width: 900px) {
-      .mission-grid { grid-template-columns: 1fr; }
-      .values-grid  { grid-template-columns: repeat(2, 1fr); }
-      .story-layout { grid-template-columns: 1fr; gap: 48px; }
-      .partner-inner { grid-template-columns: 1fr; gap: 40px; }
-      .why-grid { grid-template-columns: 1fr; }
+    .expertise-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 40px;
+      margin-bottom: 48px;
     }
 
-    @media (max-width: 640px) {
-      .values-grid { grid-template-columns: 1fr; }
-      .partner-badges { grid-template-columns: 1fr 1fr; }
-      .about-hero { min-height: 60vh; }
+    .expertise-header p {
+      max-width: 280px;
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.75;
+      flex-shrink: 0;
     }
 
-    /* ── Penteract symbol (shared with index) ── */
+    /* Two-column grid of structured listing items */
+    .listing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 48px;
+    }
+
+    .listing-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .listing-item:first-child {
+      border-top: 1px solid var(--border);
+    }
+
+    .listing-grid > div:last-child .listing-item:first-child {
+      border-top: 1px solid var(--border);
+    }
+
+    .listing-item-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .listing-item-tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--primary);
+      background: var(--primary-glow-sm);
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      flex-shrink: 0;
+    }
+
+    /* ════════════════════════════
+       PENTERACT SYMBOL SECTION
+    ════════════════════════════ */
     .symbol-section {
       padding: 110px 0;
       background: var(--dark-800);
       position: relative;
       overflow: hidden;
     }
+
     .symbol-bg-mesh {
       position: absolute;
       width: 700px; height: 700px;
@@ -513,6 +592,7 @@
       pointer-events: none;
       animation: glowPulse 6s ease-in-out infinite;
     }
+
     .symbol-inner {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -521,17 +601,20 @@
       position: relative;
       z-index: 1;
     }
+
     .symbol-canvas-wrap {
       display: flex;
       align-items: center;
       justify-content: center;
     }
+
     #penteractCanvas {
       width: 100%;
       max-width: 460px;
       aspect-ratio: 1;
       display: block;
     }
+
     .symbol-text .eyebrow {
       color: rgba(255,255,255,0.4);
       font-size: 11px;
@@ -543,6 +626,7 @@
       align-items: center;
       gap: 8px;
     }
+
     .symbol-text .eyebrow::before {
       content: '';
       display: block;
@@ -550,6 +634,7 @@
       background: var(--primary);
       border-radius: 2px;
     }
+
     .symbol-text h2 {
       font-family: var(--font-display);
       font-size: clamp(28px, 3.5vw, 44px);
@@ -559,33 +644,48 @@
       color: #fff;
       margin-bottom: 28px;
     }
+
     .symbol-text h2 span { color: var(--primary); }
+
     .symbol-text p {
       font-size: 15px;
-      color: rgba(255,255,255,0.55);
+      color: rgba(255,255,255,0.65);
       line-height: 1.85;
       margin-bottom: 18px;
     }
-    .symbol-text p strong { color: rgba(255,255,255,0.85); font-weight: 600; }
+
+    .symbol-text p strong { color: rgba(255,255,255,0.90); font-weight: 600; }
+
+    /* Unified SVG icon pillars — more padding */
     .symbol-pillars {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 12px;
       margin-top: 32px;
     }
+
     .symbol-pillar {
-      padding: 16px 14px;
+      padding: 24px 16px 20px;
       border-radius: var(--radius-md);
       background: rgba(0, 168, 89, 0.08);
       border: 1px solid rgba(0, 168, 89, 0.18);
       text-align: center;
       transition: background var(--duration-base), border-color var(--duration-base);
     }
+
     .symbol-pillar:hover {
       background: rgba(0, 168, 89, 0.14);
       border-color: rgba(0, 168, 89, 0.36);
     }
-    .symbol-pillar-icon { font-size: 22px; margin-bottom: 8px; }
+
+    .symbol-pillar-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+      height: 32px;
+    }
+
     .symbol-pillar span {
       display: block;
       font-size: 11px;
@@ -594,8 +694,126 @@
       letter-spacing: 0.1em;
       color: var(--primary);
     }
-    @media (max-width: 768px) {
-      .symbol-inner { grid-template-columns: 1fr; gap: 48px; }
+
+    /* ════════════════════════════
+       CTA SECTION (about page)
+    ════════════════════════════ */
+    .cta-section {
+      padding: 100px 0;
+    }
+
+    .cta-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border);
+    }
+
+    .cta-visual {
+      position: relative;
+      min-height: 480px;
+      background: var(--dark-700);
+      overflow: hidden;
+    }
+
+    .cta-visual img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      position: absolute;
+      inset: 0;
+      opacity: 0.70;
+    }
+
+    .cta-visual-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(35,33,33,0.65), rgba(0, 168, 89, 0.15));
+    }
+
+    .cta-visual-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+
+    /* Badge — geographic label only, no link text alongside */
+    .cta-visual-badge {
+      position: absolute;
+      bottom: 36px; left: 36px;
+      padding: 14px 20px;
+      background: rgba(255,255,255,0.07);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius-md);
+      color: #fff;
+    }
+
+    .cta-visual-badge span {
+      display: block;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: rgba(255,255,255,0.50);
+      margin-bottom: 4px;
+    }
+
+    .cta-visual-badge strong { font-size: 15px; font-weight: 600; }
+
+    .cta-panel {
+      background: var(--bg-surface);
+      padding: 68px 52px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .cta-panel h2 {
+      font-family: var(--font-display);
+      font-size: clamp(26px, 3vw, 36px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 16px;
+      margin-top: 12px;
+      color: var(--dark-800);
+    }
+
+    .cta-panel p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 32px;
+    }
+
+    /* ════════════════════════════
+       RESPONSIVE
+    ════════════════════════════ */
+    @media (max-width: 900px) {
+      .mission-grid    { grid-template-columns: 1fr; }
+      .values-grid     { grid-template-columns: repeat(2, 1fr); }
+      .story-layout    { grid-template-columns: 1fr; gap: 48px; }
+      .partner-inner   { grid-template-columns: 1fr; gap: 40px; }
+      .why-grid        { grid-template-columns: 1fr; }
+      .expertise-header{ flex-direction: column; align-items: flex-start; }
+      .listing-grid    { grid-template-columns: 1fr; gap: 0; }
+      .cta-inner       { grid-template-columns: 1fr; }
+      .cta-visual      { min-height: 260px; }
+      .cta-panel       { padding: 40px 28px; }
+    }
+
+    @media (max-width: 640px) {
+      .values-grid         { grid-template-columns: 1fr; }
+      .partner-badges      { grid-template-columns: 1fr 1fr; }
+      .about-hero          { min-height: auto; }
+      .symbol-inner        { grid-template-columns: 1fr; gap: 48px; }
+      .symbol-pillars      { grid-template-columns: repeat(3, 1fr); gap: 8px; }
     }
   </style>
 </head>
@@ -636,6 +854,8 @@
       <div class="about-hero-mesh-2"></div>
       <div class="about-hero-grid"></div>
     </div>
+    <div class="container">
+      <div class="about-hero-content">
         <div class="hero-eyebrow hero-animate-1">
           <span class="dot"></span>
           Trusted Salesforce Consultants
@@ -694,7 +914,7 @@
           <p>
             Based in South Africa, we bring global expertise with local understanding. We would love to demonstrate how our expertise and team members set us apart.
           </p>
-          <a href="https://penteract.tech/contact-penteract/" class="btn btn--primary" style="margin-top: 8px;">
+          <a href="https://penteract.tech/contact-penteract/" class="btn btn--primary" style="margin-top: 28px;">
             Work With Us
             <span class="btn-icon">
               <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
@@ -1012,15 +1232,27 @@
 
           <div class="symbol-pillars">
             <div class="symbol-pillar">
-              <div class="symbol-pillar-icon">🔗</div>
+              <div class="symbol-pillar-icon">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" width="28" height="28" style="color:var(--primary)">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"/>
+                </svg>
+              </div>
               <span>Unity</span>
             </div>
             <div class="symbol-pillar">
-              <div class="symbol-pillar-icon">🌐</div>
+              <div class="symbol-pillar-icon">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" width="28" height="28" style="color:var(--primary)">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"/>
+                </svg>
+              </div>
               <span>Connection</span>
             </div>
             <div class="symbol-pillar">
-              <div class="symbol-pillar-icon">🚀</div>
+              <div class="symbol-pillar-icon">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" width="28" height="28" style="color:var(--primary)">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5L12 3m0 0l7.5 7.5M12 3v18"/>
+                </svg>
+              </div>
               <span>Ascension</span>
             </div>
           </div>
@@ -1083,6 +1315,7 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About Us</a></li>
             <li><a href="index.html#services">Services</a></li>
+            <li><a href="about.html#symbol">Our Name</a></li>
             <li><a href="https://penteract.tech/contact-penteract/">Get In Touch</a></li>
           </ul>
         </div>
@@ -1101,10 +1334,9 @@
           </ul>
         </div>
       </div>
-      <div class="footer-watermark">PENTERACT</div>
       <div class="footer-bottom">
         <span>&copy; 2025 Penteract Technologies. All rights reserved.</span>
-        <span>Created by <a href="#">Jarryd Lamour</a></span>
+        <span>Created by <a href="https://penteract.tech/">Jarryd Lamour</a></span>
       </div>
     </div>
   </footer>
