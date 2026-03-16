@@ -30,7 +30,7 @@
       width: 700px; height: 700px;
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      background: radial-gradient(ellipse, rgba(10,173,173,0.10) 0%, transparent 70%);
+      background: radial-gradient(ellipse, rgba(0, 168, 89, 0.10) 0%, transparent 70%);
       border-radius: 50%;
       pointer-events: none;
       animation: glowPulse 6s ease-in-out infinite;
@@ -101,14 +101,14 @@
     .symbol-pillar {
       padding: 16px 14px;
       border-radius: var(--radius-md);
-      background: rgba(10, 173, 173, 0.08);
-      border: 1px solid rgba(10, 173, 173, 0.18);
+      background: rgba(0, 168, 89, 0.08);
+      border: 1px solid rgba(0, 168, 89, 0.18);
       text-align: center;
       transition: background var(--duration-base), border-color var(--duration-base);
     }
     .symbol-pillar:hover {
-      background: rgba(10, 173, 173, 0.14);
-      border-color: rgba(10, 173, 173, 0.36);
+      background: rgba(0, 168, 89, 0.14);
+      border-color: rgba(0, 168, 89, 0.36);
     }
     .symbol-pillar-icon {
       font-size: 22px;
@@ -127,6 +127,29 @@
       .symbol-inner { grid-template-columns: 1fr; gap: 48px; }
       .symbol-pillars { grid-template-columns: repeat(3, 1fr); gap: 8px; }
     }
+
+    /* ── CTA band interactive canvas ── */
+    #ctaBandCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Decagon canvas — hero background decoration ── */
+    #decagonCanvas {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 520px;
+      height: 520px;
+      opacity: 0.18;
+      pointer-events: none;
+      z-index: 0;
+    }
   </style>
 </head>
 <body>
@@ -137,7 +160,7 @@
   <div class="nav-wrap">
     <nav class="nav-pill">
       <a href="index.html" class="nav-logo-wrap">
-        <img src="logo.png" alt="Penteract Technologies" class="nav-logo">
+        <img src="image.png" alt="Penteract Technologies" class="nav-logo">
       </a>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
         <span></span><span></span><span></span>
@@ -167,7 +190,6 @@
       <div class="hero-inner">
 
         <!-- Left: text -->
-        <div class="hero-text">
           <div class="hero-eyebrow hero-animate-1">
             <span class="dot"></span>
             Salesforce Consulting Partner · South Africa
@@ -197,6 +219,7 @@
 
         <!-- Right: solution card carousel -->
         <div class="hero-carousel-wrap hero-animate-5">
+          <canvas id="decagonCanvas" width="520" height="520" aria-hidden="true"></canvas>
           <div class="hero-carousel" id="heroCarousel">
             <div class="hero-carousel-track" id="heroTrack">
 
@@ -649,7 +672,8 @@
   <!-- ══════════════════════════
        CTA BAND
   ══════════════════════════ -->
-  <section class="cta-band reveal">
+  <section class="cta-band reveal" id="ctaBandSection">
+    <canvas id="ctaBandCanvas" aria-hidden="true"></canvas>
     <div class="blob"></div>
     <div class="cta-band-inner">
       <div class="eyebrow" style="justify-content:center; color:var(--primary); margin-bottom:16px;">Dream, Build, Transcend</div>
@@ -723,7 +747,7 @@
       <div class="footer-grid">
         <div>
           <a href="index.html" class="footer-logo-wrap">
-            <img src="logo.png" alt="Penteract Technologies" class="footer-logo">
+            <img src="image.png" alt="Penteract Technologies" class="footer-logo">
           </a>
           <p class="footer-brand-desc">Dream, Build, Transcend. Using our expertise to help you connect the dots.</p>
         </div>
@@ -752,7 +776,6 @@
           </ul>
         </div>
       </div>
-      <div class="footer-wordmark">PENTERACT</div>
       <div class="footer-bottom">
         <span>&copy; 2025 Penteract Technologies. All rights reserved.</span>
         <span>Created by <a href="#">Jarryd Lamour</a></span>
@@ -762,6 +785,59 @@
 
   <script src="js/main.js"></script>
   <script src="js/penteract.js"></script>
+  <script src="js/ctaband.js"></script>
+
+  <script>
+    /* ── Animated decagon — hero background decoration ── */
+    (function () {
+      const canvas = document.getElementById('decagonCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const cx = canvas.width / 2;
+      const cy = canvas.height / 2;
+      const radius = 200;
+      const numPoints = 10;
+      let angle = 0;
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate(angle);
+        ctx.translate(-cx, -cy);
+
+        /* Edges — charcoal */
+        ctx.strokeStyle = '#232121';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        for (let i = 0; i < numPoints; i++) {
+          const a = (i / numPoints) * Math.PI * 2;
+          const x = cx + radius * Math.cos(a);
+          const y = cy + radius * Math.sin(a);
+          i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        }
+        ctx.closePath();
+        ctx.stroke();
+
+        /* Nodes — brand red accent */
+        ctx.fillStyle = '#FF0000';
+        for (let i = 0; i < numPoints; i++) {
+          const a = (i / numPoints) * Math.PI * 2;
+          const x = cx + radius * Math.cos(a);
+          const y = cy + radius * Math.sin(a);
+          ctx.beginPath();
+          ctx.arc(x, y, 6, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        ctx.restore();
+        angle += 0.004;
+        requestAnimationFrame(draw);
+      }
+
+      draw();
+    })();
+  </script>
 
 </body>
 </html>

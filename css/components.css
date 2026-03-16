@@ -29,9 +29,9 @@
 .btn--primary {
   background: var(--primary);
   color: #fff;
-  box-shadow: 0 4px 20px rgba(10, 173, 173, 0.35);
+  box-shadow: 0 4px 20px rgba(0, 168, 89, 0.35);
 }
-.btn--primary:hover { box-shadow: 0 6px 28px rgba(10, 173, 173, 0.5); }
+.btn--primary:hover { box-shadow: 0 6px 28px rgba(0, 168, 89, 0.5); }
 
 .btn--outline {
   background: transparent;
@@ -96,7 +96,7 @@
 }
 .arrow-btn:hover {
   transform: scale(1.1);
-  background: #7dbe99;
+  background: #5fa882;
 }
 .arrow-btn svg { width: 18px; height: 18px; color: var(--dark-700); }
 
@@ -123,43 +123,31 @@
   -webkit-backdrop-filter: blur(12px);
   border-radius: var(--radius-pill);
   border: 1px solid rgba(255,255,255,0.55);
-  box-shadow: 0 4px 30px rgba(3, 20, 39, 0.07);
+  box-shadow: 0 4px 30px rgba(35, 33, 33, 0.07);
   transition: box-shadow var(--duration-slow);
 }
 .nav-pill.scrolled {
-  box-shadow: 0 8px 48px rgba(3, 20, 39, 0.12);
+  box-shadow: 0 8px 48px rgba(35, 33, 33, 0.12);
 }
 
-/* Logo pill — dark branded container */
+/* Logo — no bubble, just the image */
 .nav-logo-wrap {
   display: flex;
   align-items: center;
-  padding: 6px 18px 6px 12px;
-  background: var(--dark-800);
-  border-radius: var(--radius-pill);
-  border: 1px solid rgba(10, 173, 173, 0.28);
-  box-shadow: 0 0 20px rgba(10, 173, 173, 0.16), 0 2px 8px rgba(0,0,0,0.20);
-  transition:
-    box-shadow var(--duration-base) var(--ease-out),
-    border-color var(--duration-base),
-    transform var(--duration-fast) var(--ease-out);
-  flex-shrink: 0;
+  padding: 4px 16px 4px 8px;
+  flex: 1;
+  transition: opacity var(--duration-fast);
 }
 .nav-logo-wrap:hover {
-  box-shadow: 0 0 32px rgba(10, 173, 173, 0.32), 0 4px 16px rgba(0,0,0,0.24);
-  border-color: rgba(10, 173, 173, 0.55);
-  transform: translateY(-1px);
+  opacity: 0.85;
 }
 .nav-logo {
-  /* Transparent PNG — invert to pure white on the dark pill background */
-  height: 34px;
-  width: auto;
-  filter: brightness(0) invert(1);
+  height: 46px;
+  width: 100%;
+  max-width: 340px;
+  object-fit: contain;
+  object-position: left center;
   display: block;
-  transition: opacity var(--duration-base);
-}
-.nav-logo-wrap:hover .nav-logo {
-  opacity: 0.88;
 }
 
 /* Links */
@@ -181,29 +169,29 @@
   white-space: nowrap;
 }
 .nav-links a:hover {
-  color: var(--primary);
-  background: var(--primary-glow-sm);
+  color: #00A859;
+  background: rgba(0, 168, 89, 0.08);
 }
-.nav-links a.active { color: var(--dark-800); font-weight: 600; }
+.nav-links a.active { color: #FF0000; font-weight: 600; }
 
 /* CTA in nav */
 .nav-cta-link {
   display: inline-flex;
   align-items: center;
   padding: 10px 24px !important;
-  background: var(--primary) !important;
+  background: #00A859 !important;
   color: #fff !important;
   border-radius: var(--radius-pill) !important;
   font-weight: 600 !important;
   font-size: 13px !important;
-  box-shadow: 0 3px 16px rgba(10, 173, 173, 0.35);
+  box-shadow: 0 3px 16px rgba(0, 168, 89, 0.30);
   transition: background var(--duration-base), box-shadow var(--duration-base) !important;
   margin-left: 4px;
 }
 .nav-cta-link:hover {
-  background: var(--primary-dark) !important;
+  background: #008a47 !important;
   color: #fff !important;
-  box-shadow: 0 5px 24px rgba(10, 173, 173, 0.5) !important;
+  box-shadow: 0 5px 24px rgba(0, 168, 89, 0.45) !important;
   animation: none !important;
 }
 
@@ -268,7 +256,7 @@
   pointer-events: none;
 }
 
-.card--teal { background: var(--dark-600); border-color: rgba(10,173,173,0.15); }
+.card--teal { background: var(--dark-600); border-color: rgba(0, 168, 89, 0.15); }
 
 /* Card icon */
 .card-icon {
@@ -331,7 +319,7 @@
   pointer-events: none;
   z-index: 0;
   border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%;
-  background: rgba(198, 237, 237, 0.35);
+  background: rgba(0, 168, 89, 0.10);
   animation: blobMorph 12s ease-in-out infinite alternate;
 }
 
@@ -401,26 +389,15 @@
 .footer-logo-wrap {
   display: inline-flex;
   align-items: center;
-  padding: 10px 22px;
-  /* White bg pill so the transparent PNG renders with its natural teal+black colors */
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 12px 26px;
+  background: rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-pill);
   margin-bottom: 20px;
-  transition: border-color var(--duration-base), box-shadow var(--duration-base), background var(--duration-base);
+  position: relative;
+  overflow: hidden;
 }
-.footer-logo-wrap:hover {
-  background: rgba(255, 255, 255, 0.10);
-  border-color: rgba(10, 173, 173, 0.40);
-  box-shadow: 0 0 22px rgba(10, 173, 173, 0.14);
-}
-.footer-logo {
-  /* Natural colors show on the semi-transparent pill — logo is transparent PNG */
-  height: 34px;
-  filter: brightness(0) invert(1);  /* white on dark footer */
-  display: block;
-  transition: filter var(--duration-base);
-}
+
+
 
 /* ── Responsive ── */
 @media (max-width: 768px) {

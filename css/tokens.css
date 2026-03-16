@@ -1,48 +1,58 @@
 /* ─── DESIGN TOKENS — Penteract Redesign ─── */
 :root {
-  /* ── Brand ── */
-  --primary:         #0AADAD;
-  --primary-dark:    #088F8F;
-  --primary-light:   #12CFCF;
-  --primary-glow:    rgba(10, 173, 173, 0.18);
-  --primary-glow-sm: rgba(10, 173, 173, 0.08);
+  /* ══════════════════════════════════════════
+     BRAND COLOUR PALETTE — centrally managed
+  ══════════════════════════════════════════ */
+  --color-primary:    #00A859;   /* Primary Green */
+  --color-accent:     #FF0000;   /* Brand Red — accent only, never as background */
+  --color-charcoal:   #232121;   /* Near-Black / Charcoal */
+  --color-grey-light: #D2D3D5;   /* Light Grey */
+  --color-text:       #4A4A4A;   /* Body Text Dark Grey */
+  --color-white:      #FFFFFF;   /* White */
 
-  /* ── Dark palette ── */
-  --dark-900:        #020D18;
-  --dark-800:        #031427;   /* deep charcoal — headings */
-  --dark-700:        #06284C;   /* deep navy — solution cards */
-  --dark-600:        #053040;   /* dark teal — alternate cards */
+  /* ── Primary (Brand Green) ── */
+  --primary:         #00A859;
+  --primary-dark:    #008a47;
+  --primary-light:   #00c96a;
+  --primary-glow:    rgba(0, 168, 89, 0.18);
+  --primary-glow-sm: rgba(0, 168, 89, 0.08);
+
+  /* ── Dark palette (Charcoal) ── */
+  --dark-900:        #1a1919;   /* very dark charcoal */
+  --dark-800:        #232121;   /* near-black / charcoal — headings, strong elements */
+  --dark-700:        #2e2b2b;   /* dark charcoal — solution cards */
+  --dark-600:        #3a3737;   /* medium-dark charcoal — alternate cards */
 
   /* ── Neutrals ── */
-  --muted:           #5E748D;   /* nav links, body text */
-  --text-primary:    #031427;
-  --text-secondary:  #5E748D;
-  --text-muted:      #7A93AE;
-  --text-faint:      #B0C3D4;
+  --muted:           #4A4A4A;   /* nav links, body text */
+  --text-primary:    #232121;
+  --text-secondary:  #4A4A4A;
+  --text-muted:      #6B6B6B;
+  --text-faint:      #A0A0A0;
 
   /* ── Backgrounds ── */
-  --bg-body:         #F8FAFB;
+  --bg-body:         #f5f5f5;
   --bg-surface:      #FFFFFF;
-  --bg-subtle:       #EEF7F7;
-  --bg-lavender:     #E8F4F4;
+  --bg-subtle:       #F0F7F3;   /* very light green tint — testimonials bg */
+  --bg-lavender:     #EAF5EF;   /* light green tint — eyebrow pills, CTA band */
   --bg-nav:          rgba(255, 255, 255, 0.79);
 
   /* ── Tints ── */
-  --tint-light:      #C6EDED;   /* icon bg, highlights */
-  --accent-pink:     #CE5088;
-  --accent-purple:   #4A1060;
-  --mint:            #97CEAD;   /* arrow circle buttons */
+  --tint-light:      #D2D3D5;   /* brand light grey — icon bg, decorative numbers */
+  --accent-pink:     #00A859;   /* repurposed to primary green — quote icon bg */
+  --accent-purple:   #232121;   /* repurposed to charcoal */
+  --mint:            #7DC0A0;   /* soft green — arrow circle buttons */
 
   /* ── Borders ── */
-  --border:          #DDE6EE;
-  --border-light:    rgba(198, 237, 237, 0.45);
+  --border:          #D2D3D5;
+  --border-light:    rgba(210, 211, 213, 0.45);
 
   /* ── Shadows ── */
-  --shadow-card:     0 4px 24px rgba(3, 20, 39, 0.08);
-  --shadow-sm:       0 2px 8px  rgba(3, 20, 39, 0.06);
-  --shadow-md:       0 8px 32px rgba(3, 20, 39, 0.08);
-  --shadow-lg:       0 20px 60px rgba(3, 20, 39, 0.10);
-  --shadow-glow:     0 0 40px rgba(10, 173, 173, 0.22);
+  --shadow-card:     0 4px 24px rgba(35, 33, 33, 0.08);
+  --shadow-sm:       0 2px 8px  rgba(35, 33, 33, 0.06);
+  --shadow-md:       0 8px 32px rgba(35, 33, 33, 0.08);
+  --shadow-lg:       0 20px 60px rgba(35, 33, 33, 0.10);
+  --shadow-glow:     0 0 40px rgba(0, 168, 89, 0.22);
 
   /* ── Typography ── */
   --font:         -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
