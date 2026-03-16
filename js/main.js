@@ -46,8 +46,11 @@ navLinks?.querySelectorAll('a').forEach(a => {
 
 // ── Hero solution cards carousel ──
 (function initHeroCarousel() {
-  const track  = document.getElementById('heroTrack');
-  const dots   = document.querySelectorAll('#heroDots .carousel-dot');
+  const track    = document.getElementById('heroTrack');
+  const carousel = document.getElementById('heroCarousel');
+  const dots     = document.querySelectorAll('#heroDots .carousel-dot');
+  const prevBtn  = document.getElementById('heroPrev');
+  const nextBtn  = document.getElementById('heroNext');
   if (!track || !dots.length) return;
 
   const cards  = track.querySelectorAll('.hero-card');
@@ -56,9 +59,14 @@ navLinks?.querySelectorAll('a').forEach(a => {
 
   function goTo(index) {
     current = (index + cards.length) % cards.length;
-    track.style.transform = `translateX(calc(-${current * 100}% - ${current * 20}px))`;
+    // Pixel-based offset — each card fills the exact carousel container width
+    const slotW = carousel.offsetWidth;
+    track.style.transform = `translateX(-${current * slotW}px)`;
     dots.forEach((d, i) => d.classList.toggle('active', i === current));
   }
+
+  // Recalculate on resize so offset stays accurate at any viewport width
+  window.addEventListener('resize', () => goTo(current), { passive: true });
 
   function startAutoplay() {
     autoplay = setInterval(() => goTo(current + 1), 3500);
@@ -68,6 +76,7 @@ navLinks?.querySelectorAll('a').forEach(a => {
     clearInterval(autoplay);
   }
 
+  // Dot navigation
   dots.forEach(dot => {
     dot.addEventListener('click', () => {
       stopAutoplay();
@@ -76,9 +85,22 @@ navLinks?.querySelectorAll('a').forEach(a => {
     });
   });
 
-  const wrap = document.getElementById('heroCarousel');
-  wrap?.addEventListener('mouseenter', stopAutoplay);
-  wrap?.addEventListener('mouseleave', startAutoplay);
+  // Prev / Next buttons
+  prevBtn?.addEventListener('click', () => {
+    stopAutoplay();
+    goTo(current - 1);
+    startAutoplay();
+  });
+
+  nextBtn?.addEventListener('click', () => {
+    stopAutoplay();
+    goTo(current + 1);
+    startAutoplay();
+  });
+
+  // Pause autoplay on hover
+  carousel.addEventListener('mouseenter', stopAutoplay);
+  carousel.addEventListener('mouseleave', startAutoplay);
 
   // Touch swipe
   let startX = 0;

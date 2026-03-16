@@ -65,7 +65,7 @@
 }
 
 .btn--sm { padding: 9px 20px; font-size: 13px; }
-.btn--lg { padding: 16px 38px; font-size: 15px; }
+.btn--lg { padding: 16px 38px; font-size: 15px; min-width: 220px; justify-content: center; }
 
 /* Icon inside button */
 .btn-icon {
@@ -172,7 +172,7 @@
   color: #00A859;
   background: rgba(0, 168, 89, 0.08);
 }
-.nav-links a.active { color: #FF0000; font-weight: 600; }
+.nav-links a.active { color: #00A859; font-weight: 600; }
 
 /* CTA in nav */
 .nav-cta-link {
@@ -389,12 +389,22 @@
 .footer-logo-wrap {
   display: inline-flex;
   align-items: center;
-  padding: 12px 26px;
+  padding: 10px 20px;
   background: rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-pill);
   margin-bottom: 20px;
   position: relative;
   overflow: hidden;
+}
+
+/* Footer logo — smaller than nav logo */
+.footer-logo {
+  height: 32px;
+  width: auto;
+  max-width: 200px;
+  object-fit: contain;
+  object-position: left center;
+  display: block;
 }
 
 
