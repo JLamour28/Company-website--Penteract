@@ -1,71 +1,55 @@
-/* ─── PENTERACT SYMBOL — Animated 5D Hypercube ─── */
+/* ─── PENTERACT SYMBOL — Gosset 4_21 Polytope Style Animation ─── */
 (function () {
   const canvas = document.getElementById('penteractCanvas');
   if (!canvas) return;
 
   const ctx = canvas.getContext('2d');
-  let W, H, cx, cy, scale;
-  let angle = 0;
+  let W, H, cx, cy, maxR;
 
-  // Penteract has 2^5 = 32 vertices, all ±1 in 5 dimensions
-  function buildVertices() {
-    const verts = [];
-    for (let i = 0; i < 32; i++) {
-      verts.push([
-        (i >> 0 & 1) * 2 - 1,
-        (i >> 1 & 1) * 2 - 1,
-        (i >> 2 & 1) * 2 - 1,
-        (i >> 3 & 1) * 2 - 1,
-        (i >> 4 & 1) * 2 - 1,
-      ]);
-    }
-    return verts;
-  }
+  // Colors matching the logo: red nodes, dark edges
+  const NODE_COLOR   = '220, 38, 38';    // #DC2626 — vivid red
+  const EDGE_COLOR   = '255, 255, 255';  // white lines (visible on dark bg)
+  const STROKE_COLOR = '0, 0, 0';        // node outline
 
-  // Edges: connect vertices that differ by exactly one bit
-  function buildEdges(verts) {
-    const edges = [];
-    for (let i = 0; i < verts.length; i++) {
-      for (let j = i + 1; j < verts.length; j++) {
-        let diff = 0;
-        for (let d = 0; d < 5; d++) {
-          if (verts[i][d] !== verts[j][d]) diff++;
+  // Central node + inner hexagon + middle layer only
+  const ringConfig = [
+    { frac: 0,         count: 1  },  // Central node
+    { frac: 110 / 420, count: 6  },  // Inner hexagon
+    { frac: 210 / 420, count: 12 },  // Middle layer (now the boundary)
+  ];
+
+  // Mirrors template's 240/420 connection threshold
+  const CONNECT_FRAC = 240 / 420;
+
+  let baseVertices = [];
+  let edges = [];
+
+  function buildGraph() {
+    baseVertices = [];
+    ringConfig.forEach((ring, ringIdx) => {
+      const r = ring.frac * maxR;
+      for (let i = 0; i < ring.count; i++) {
+        const angle = (i * 2 * Math.PI) / ring.count - Math.PI / 2;
+        baseVertices.push({
+          ox: r * Math.cos(angle),
+          oy: r * Math.sin(angle),
+          ringIdx,
+        });
+      }
+    });
+
+    edges = [];
+    const threshold = maxR * CONNECT_FRAC;
+    for (let i = 0; i < baseVertices.length; i++) {
+      for (let j = i + 1; j < baseVertices.length; j++) {
+        const dx = baseVertices[i].ox - baseVertices[j].ox;
+        const dy = baseVertices[i].oy - baseVertices[j].oy;
+        if (Math.sqrt(dx * dx + dy * dy) < threshold) {
+          edges.push([i, j]);
         }
-        if (diff === 1) edges.push([i, j]);
       }
     }
-    return edges;
   }
-
-  // Rotate in a 2D plane (dimensions a and b) by angle θ
-  function rotate(v, a, b, theta) {
-    const r = v.slice();
-    r[a] = v[a] * Math.cos(theta) - v[b] * Math.sin(theta);
-    r[b] = v[a] * Math.sin(theta) + v[b] * Math.cos(theta);
-    return r;
-  }
-
-  // Project 5D → 2D via perspective projection on each dimension
-  function project(v) {
-    // Sequential perspective projection: 5D→4D→3D→2D
-    const d = 2.8; // perspective distance
-    let p = v.slice();
-
-    // 5D → 4D
-    const w5 = d / (d - p[4]);
-    p = [p[0] * w5, p[1] * w5, p[2] * w5, p[3] * w5];
-
-    // 4D → 3D
-    const w4 = d / (d - p[3]);
-    p = [p[0] * w4, p[1] * w4, p[2] * w4];
-
-    // 3D → 2D
-    const w3 = d / (d - p[2]);
-    return [p[0] * w3, p[1] * w3];
-  }
-
-  const vertices = buildVertices();
-  const edges    = buildEdges(vertices);
 
   function resize() {
     const rect = canvas.getBoundingClientRect();
@@ -73,76 +57,69 @@
     H  = canvas.height = rect.height * devicePixelRatio;
     cx = W / 2;
     cy = H / 2;
-    scale = Math.min(W, H) * 0.22;
+    // Outermost ring is at frac 210/420 — scale so it fills 80% of the container (radius = 40%)
+    maxR = Math.min(W, H) * 0.40 * (420 / 210);
+    buildGraph();
   }
 
   function draw(t) {
     ctx.clearRect(0, 0, W, H);
 
-    // Composite slow rotations across multiple planes
-    const a = t * 0.00028;
-    const b = t * 0.00019;
-    const c = t * 0.00013;
-    const d = t * 0.00023;
-    const e = t * 0.00017;
+    const rotation = t * 0.00020;
+    const cosA = Math.cos(rotation);
+    const sinA = Math.sin(rotation);
 
-    // Transform all vertices
-    const transformed = vertices.map(v => {
-      let r = v.slice();
-      r = rotate(r, 0, 1, a);
-      r = rotate(r, 2, 3, b);
-      r = rotate(r, 0, 2, c);
-      r = rotate(r, 1, 4, d);
-      r = rotate(r, 3, 4, e);
-      return r;
-    });
+    // Rotate all vertices
+    const pts = baseVertices.map(v => ({
+      x: cx + v.ox * cosA - v.oy * sinA,
+      y: cy + v.ox * sinA + v.oy * cosA,
+      ringIdx: v.ringIdx,
+    }));
 
-    // Project to 2D screen coords
-    const pts = transformed.map(v => {
-      const [px, py] = project(v);
-      return [cx + px * scale, cy + py * scale];
-    });
+    const MAX_RING = ringConfig.length - 1;
 
-    // Depth value for each vertex (use z after rotation for shading)
-    const depths = transformed.map(v => v[2]);
-    const minD = Math.min(...depths);
-    const maxD = Math.max(...depths);
-    const depthNorm = v => (v - minD) / (maxD - minD); // 0 = back, 1 = front
-
-    // Draw edges
+    // ── Edges — thin, charcoal-white lines like the logo ──
     edges.forEach(([i, j]) => {
-      const dAvg = (depthNorm(depths[i]) + depthNorm(depths[j])) / 2;
-      const alpha = 0.12 + dAvg * 0.42;
-      const lineW = 0.5 + dAvg * 1.2;
+      // Edges near center are slightly brighter
+      const avgRing = (pts[i].ringIdx + pts[j].ringIdx) / 2;
+      const depth   = 1 - (avgRing / MAX_RING) * 0.5;
+      const alpha   = 0.12 + depth * 0.18;  // subtle, like logo's dark lines on white
 
       ctx.beginPath();
-      ctx.moveTo(pts[i][0], pts[i][1]);
-      ctx.lineTo(pts[j][0], pts[j][1]);
-      ctx.strokeStyle = `rgba(10, 173, 173, ${alpha})`;
-      ctx.lineWidth = lineW;
+      ctx.moveTo(pts[i].x, pts[i].y);
+      ctx.lineTo(pts[j].x, pts[j].y);
+      ctx.strokeStyle = `rgba(${EDGE_COLOR}, ${alpha})`;
+      ctx.lineWidth   = 1.0 * devicePixelRatio;
       ctx.stroke();
     });
 
-    // Draw nodes
-    pts.forEach((p, i) => {
-      const dn = depthNorm(depths[i]);
-      const r = 1.8 + dn * 3.2;
-      const alpha = 0.35 + dn * 0.65;
+    // ── Nodes — red fill with dark stroke, matching the logo exactly ──
+    pts.forEach(p => {
+      // Outer nodes slightly smaller to match logo's uniform-but-layered look
+      const depth = 1 - (p.ringIdx / MAX_RING) * 0.35;
+      const r     = (3.2 + depth * 2.8) * devicePixelRatio;
 
-      // Outer glow
-      const grd = ctx.createRadialGradient(p[0], p[1], 0, p[0], p[1], r * 3.5);
-      grd.addColorStop(0, `rgba(10, 173, 173, ${alpha * 0.35})`);
-      grd.addColorStop(1, 'rgba(10, 173, 173, 0)');
+      // Soft red glow (logo has a sharp red, we add a subtle halo for depth on dark bg)
+      const grd = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r * 4.5);
+      grd.addColorStop(0, `rgba(${NODE_COLOR}, 0.22)`);
+      grd.addColorStop(1, `rgba(${NODE_COLOR}, 0)`);
       ctx.beginPath();
-      ctx.arc(p[0], p[1], r * 3.5, 0, Math.PI * 2);
+      ctx.arc(p.x, p.y, r * 4.5, 0, Math.PI * 2);
       ctx.fillStyle = grd;
       ctx.fill();
 
-      // Node
+      // Red fill — logo color
       ctx.beginPath();
-      ctx.arc(p[0], p[1], r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(10, 173, 173, ${alpha})`;
+      ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgb(${NODE_COLOR})`;
       ctx.fill();
+
+      // Black stroke outline — matches logo's node style
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(${STROKE_COLOR}, 0.70)`;
+      ctx.lineWidth   = 1.0 * devicePixelRatio;
+      ctx.stroke();
     });
   }
 
@@ -151,13 +128,8 @@
     requestAnimationFrame(loop);
   }
 
-  // Init
   resize();
-  window.addEventListener('resize', () => {
-    resize();
-  }, { passive: true });
-
-  // Use ResizeObserver for canvas parent size changes
+  window.addEventListener('resize', resize, { passive: true });
   if (typeof ResizeObserver !== 'undefined') {
     new ResizeObserver(resize).observe(canvas);
   }
